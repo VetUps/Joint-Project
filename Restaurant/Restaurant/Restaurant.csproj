@@ -10,14 +10,14 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\Leotaro-Regular.otf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Pages\" />
+    <None Remove="Resources\Images\main_menu_background.png" />
+    <None Remove="Resources\Images\restaurant_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Fonts\Leotaro-Regular.otf" />
+    <Resource Include="Resources\Images\main_menu_background.png" />
+    <Resource Include="Resources\Images\restaurant_logo.png" />
   </ItemGroup>
 
 </Project>
