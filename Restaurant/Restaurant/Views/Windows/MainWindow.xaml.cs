@@ -19,6 +19,7 @@ namespace Restaurant
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/MainMenuPage.xaml"), UriKind.Relative);
         }
     }
 }

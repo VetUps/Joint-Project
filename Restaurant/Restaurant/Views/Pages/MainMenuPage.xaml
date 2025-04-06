@@ -17,9 +17,6 @@
             <ImageBrush ImageSource="pack://application:,,,/Resources/Images/main_menu_background.png"/>
         </Grid.Background>
         <Rectangle Grid.Column="0">
-            <Rectangle.Effect>
-                <BlurEffect Radius="10"/>
-            </Rectangle.Effect>
             <Rectangle.Fill>
                 <SolidColorBrush Color="#2B180B" 
                                  Opacity="0.8"/>
