@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920">
     <Grid>
+        <!-- Вертикальное расположение элементов -->
+        <DockPanel>
+            <!-- Верхняя навигационная панель -->
+            <Border DockPanel.Dock="Top" 
+                    Background="#27150A" 
+                    Height="100">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="40, 0">
 
+                    <Button Content="Меню"/>
+
+                    <Button Content="Забронировать столик"
+                            Margin="40,0"/>
+
+                    <Button Content="Отзывы"/>
+                </StackPanel>
+            </Border>
+
+            <Frame/>
+        </DockPanel>
     </Grid>
 </Window>
