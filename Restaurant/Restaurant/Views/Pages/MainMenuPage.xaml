@@ -16,12 +16,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Resources/Images/main_menu_background.png"/>
         </Grid.Background>
-        <Rectangle Grid.Column="0">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="#2B180B" 
-                                 Opacity="0.8"/>
-            </Rectangle.Fill>
-        </Rectangle>
+        
         <StackPanel Grid.Column="0" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
