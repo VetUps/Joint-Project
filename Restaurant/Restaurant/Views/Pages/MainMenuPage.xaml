@@ -35,7 +35,9 @@
                    Width="135"/>
             <TextBlock Text="У Камина"
                        FontSize="106.44"
-                       Margin="30 0 0 0"/>
+                       Margin="30 0 0 0"
+                       Style="{StaticResource TextBlockMainStyle}"
+                       VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>
