@@ -18,12 +18,15 @@
                             VerticalAlignment="Center"
                             Margin="40, 0">
 
-                    <Button Content="Меню"/>
+                    <Button Content="Меню"
+                            Style="{StaticResource NavButtonStyle}"/>
 
                     <Button Content="Забронировать столик"
+                            Style="{StaticResource NavButtonStyle}"
                             Margin="40,0"/>
 
-                    <Button Content="Отзывы"/>
+                    <Button Content="Отзывы"
+                            Style="{StaticResource NavButtonStyle}"/>
                 </StackPanel>
             </Border>
 
