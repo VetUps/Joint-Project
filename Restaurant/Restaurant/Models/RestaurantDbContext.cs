@@ -16,6 +16,8 @@ public partial class RestaurantDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Admin> Admins { get; set; }
+
     public virtual DbSet<Allergen> Allergens { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -36,13 +38,30 @@ public partial class RestaurantDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=176.113.83.11;user=mega_user;password=1234;database=restaurant_db", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.28-mariadb"));
+        => optionsBuilder.UseMySql("server=176.113.83.11;database=restaurant_db;user=mega_user;password=1234", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.28-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<Admin>(entity =>
+        {
+            entity.HasKey(e => e.AdminId).HasName("PRIMARY");
+
+            entity.ToTable("admin");
+
+            entity.Property(e => e.AdminId)
+                .HasColumnType("int(11)")
+                .HasColumnName("admin_id");
+            entity.Property(e => e.AdminLogin)
+                .HasMaxLength(30)
+                .HasColumnName("admin_login");
+            entity.Property(e => e.AdminPassword)
+                .HasMaxLength(20)
+                .HasColumnName("admin_password");
+        });
 
         modelBuilder.Entity<Allergen>(entity =>
         {
