@@ -103,14 +103,20 @@ public partial class RestaurantDbContext : DbContext
                 .HasMaxLength(13)
                 .IsFixedLength()
                 .HasColumnName("client_phone");
+
+            entity.HasMany(c => c.ClientTables) // Client имеет много ClientTable записей
+           .WithOne(ct => ct.Client) // ClientTable связана с одним Client
+           .HasForeignKey(ct => ct.ClientId);
         });
 
         modelBuilder.Entity<ClientTable>(entity =>
         {
             entity
-                .HasNoKey()
-                .ToTable("client_table")
-                .UseCollation("utf8mb4_unicode_ci");
+             .ToTable("client_table") 
+             .UseCollation("utf8mb4_unicode_ci");
+
+            entity.HasKey(e => new { e.ClientId, e.TableId }); 
+
 
             entity.HasIndex(e => e.ClientId, "client_fk_idx");
 
@@ -123,7 +129,7 @@ public partial class RestaurantDbContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("table_id");
 
-            entity.HasOne(d => d.Client).WithMany()
+            entity.HasOne(d => d.Client).WithMany(c => c.ClientTables) 
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_fk");

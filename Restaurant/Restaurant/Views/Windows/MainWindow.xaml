@@ -26,7 +26,7 @@
                             Margin="40,0"/>
 
                     <Button Content="Отзывы"
-                            Style="{StaticResource NavButtonStyle}"/>
+                            Style="{StaticResource NavButtonStyle}" Click="Button_Click"/>
                 </StackPanel>
             </Border>
 
