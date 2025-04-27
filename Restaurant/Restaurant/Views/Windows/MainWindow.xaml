@@ -30,8 +30,7 @@
                 </StackPanel>
             </Border>
 
-            <Frame x:Name="MainFrame"
-                    />
+            <Frame x:Name="MainFrame"/>
         </DockPanel>
     </Grid>
 </Window>
