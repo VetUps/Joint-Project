@@ -24,8 +24,17 @@
             
             <!-- Frame, обёрнутый в Border для просмотра столиков -->
             <Border Background="Black" Grid.Row="0">
-                <Frame x:Name="TablesFrame"
-                       Margin="10"/>
+                <StackPanel Background="#402715"
+                            Margin="5"
+                            Orientation="Vertical">
+                    <TextBlock x:Name="currentZoneTextBlock"
+                               FontSize="50"
+                               Text="Пример"
+                               TextAlignment="Center"/>
+                    <ListView Background="#402715"
+                              HorizontalContentAlignment="Stretch"
+                              Margin="10"/>
+                </StackPanel>
             </Border>
             
             <!-- StackPanel с кнопки переключения между зонами ресторана -->
