@@ -21,5 +21,20 @@ namespace Restaurant
             InitializeComponent();
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/MainMenuPage.xaml"), UriKind.Relative);
         }
+
+        private void menuNavigateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tableReservationNavigateButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/TableReservationPage.xaml"), UriKind.Relative);
+        }
+
+        private void reviewsNavigateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
