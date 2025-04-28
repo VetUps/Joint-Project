@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
 
-    <Border BorderBrush="White" 
+    <Border BorderBrush="Black" 
             BorderThickness="6" 
             CornerRadius="20" 
             Background="#402715">
