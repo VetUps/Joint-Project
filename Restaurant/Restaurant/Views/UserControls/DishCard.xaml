@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Restaurant.Views.UserControls.DishCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Restaurant.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="565" d:DesignWidth="394" Width="Auto">
+    <Grid>
+        <StackPanel>
+            <Image x:Name="dishImage" 
+                   Source="{Binding DishImage}"
+                   Height="394"
+                   Width="394"
+                   VerticalAlignment="Top"/>
+            <TextBlock x:Name="dishNameTextBlock" 
+                       Text="{Binding DishName}"
+                       FontSize="50.93"/>
+            <TextBlock x:Name="dishDescriptionTextBlokc" 
+                       Text="{Binding DishDescription}"
+                       FontSize="20.49"/>
+            <TextBlock x:Name="dishPriceTextBlock"
+                       Text="{Binding DishPrice, StringFormat={}{0} ₽}"
+                       FontSize="33.28"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
