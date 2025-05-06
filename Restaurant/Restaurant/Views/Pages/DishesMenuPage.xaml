@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Restaurant.Views.Pages"
+      xmlns:local="clr-namespace:Restaurant.Views.Pages" xmlns:local1="clr-namespace:Restaurant.Views.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Меню" Background="#402715">
@@ -18,13 +18,19 @@
             
         </StackPanel>
 
-        <ListBox ItemsSource="{Binding MyItems}"
+        <ListBox ItemsSource="{Binding DishCardSource}"
                  Grid.Row="1"
                  Margin="30"
-                 Background="Transparent">
+                 Background="Transparent"
+                 HorizontalAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
+                    <UniformGrid Columns="3"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

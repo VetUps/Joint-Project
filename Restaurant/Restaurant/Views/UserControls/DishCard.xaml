@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Restaurant.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="565" d:DesignWidth="394" Width="Auto">
-    <Grid>
-        <StackPanel>
+             d:DesignHeight="565" d:DesignWidth="394" Foreground="White"
+             FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Image x:Name="dishImage" 
                    Source="{Binding DishImage}"
                    Height="394"
@@ -15,13 +17,18 @@
                    VerticalAlignment="Top"/>
             <TextBlock x:Name="dishNameTextBlock" 
                        Text="{Binding DishName}"
-                       FontSize="50.93"/>
+                       FontSize="50.93"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"/>
             <TextBlock x:Name="dishDescriptionTextBlokc" 
                        Text="{Binding DishDescription}"
-                       FontSize="20.49"/>
+                       FontSize="20.49"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"/>
             <TextBlock x:Name="dishPriceTextBlock"
                        Text="{Binding DishPrice, StringFormat={}{0} ₽}"
-                       FontSize="33.28"/>
+                       FontSize="33.28"
+                       TextAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

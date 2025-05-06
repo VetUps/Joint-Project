@@ -18,8 +18,10 @@
                             VerticalAlignment="Center"
                             Margin="40, 0">
 
-                    <Button Content="Меню"
-                            Style="{StaticResource NavButtonStyle}"/>
+                    <Button x:Name="menuNavigateButton"
+                            Content="Меню"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="menuNavigateButton_Click"/>
 
                     <Button Content="Забронировать столик"
                             Style="{StaticResource NavButtonStyle}"
