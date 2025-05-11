@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace Restaurant.Views.Pages
 {
@@ -97,12 +98,12 @@ namespace Restaurant.Views.Pages
             }
             */
 
-            if (menuCategoryComboBox.SelectedIndex != -1)
-            {
-                string filterMethod = menuCategoryComboBox.SelectedItem.ToString();
-                MenuCategoryFilter(filterMethod);
-            }
 
+            List<string> filters = menuCategoryComboBox.SelectedItems.Cast<string>().ToList();
+            MenuCategoryFilter(filters);
+
+            List<string> exceptions = exceptionMenuCategoryCheckComboBox.SelectedItems.Cast<string>().ToList();
+            ExceptionMenuCategoryFilter(exceptions);
             //SearchPartners(searchText);
         }
 
@@ -136,22 +137,16 @@ namespace Restaurant.Views.Pages
         */
 
         // Функция фильтрации по категориям меню
-        private void MenuCategoryFilter(string filterMethod)
+        private void MenuCategoryFilter(List<string> filters)
         {
-            if (filterMethod == "Без фильтрации")
-            {
-                // Возможно что-то
-            }
+            if (filters.Count == 0)
+                return;
 
-            else
-            {
-                var filtered = _dishCards.Where(o => o.dishInfo.MenuCategory.MenuCategoryName == filterMethod).ToList();
+            var filtered = _dishCards.Where(o => !filters.Contains(o.dishInfo.MenuCategory.MenuCategoryName)).ToList();
                 
-                DishCardSource.Clear();
-                foreach (var item in filtered)
-                {
-                    DishCardSource.Add(item);
-                }
+            foreach (var item in filtered)
+            {
+                DishCardSource.Remove(item);
             }
         }
 
@@ -164,12 +159,29 @@ namespace Restaurant.Views.Pages
 
             foreach (var item in menuCategories)
             {
-                menuCategoryComboBox.Items.Add(item.MenuCategoryName); 
+                menuCategoryComboBox.Items.Add(item.MenuCategoryName);
+                exceptionMenuCategoryCheckComboBox.Items.Add(item.MenuCategoryName);
             }
         }
 
         // Событие на выбор фильтра категории меню
-        private void menuCategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void menuCategoryComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
+        {
+            ApplyNavSettings();
+        }
+
+        // Функция фильтрации по категориям меню
+        private void ExceptionMenuCategoryFilter(List<string> exceptions)
+        {
+            var filtered = _dishCards.Where(o => exceptions.Contains(o.dishInfo.MenuCategory.MenuCategoryName)).ToList();
+
+            foreach (var item in filtered)
+            {
+                DishCardSource.Remove(item);
+            }
+        }
+
+        private void exceptionMenuCategoryCheckComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
         {
             ApplyNavSettings();
         }

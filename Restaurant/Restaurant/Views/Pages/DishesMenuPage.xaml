@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Restaurant.Views.Pages" xmlns:local1="clr-namespace:Restaurant.Views.UserControls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Меню" Background="#402715">
@@ -24,8 +25,13 @@
                 <ColumnDefinition Width="550*"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="menuCategoryComboBox" 
-                      Grid.Column="0" SelectionChanged="menuCategoryComboBox_SelectionChanged"/>
+            <xctk:CheckComboBox x:Name="menuCategoryComboBox" 
+                                Grid.Column="0" 
+                                ItemSelectionChanged="menuCategoryComboBox_ItemSelectionChanged"/>
+
+            <xctk:CheckComboBox x:Name="exceptionMenuCategoryCheckComboBox"
+                                Grid.Column="2"
+                                ItemSelectionChanged="exceptionMenuCategoryCheckComboBox_ItemSelectionChanged"/>
         </Grid>
 
         <ListBox ItemsSource="{Binding DishCardSource}"
