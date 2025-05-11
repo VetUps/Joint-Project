@@ -25,6 +25,9 @@ namespace Restaurant.Views.UserControls
         {
             InitializeComponent();
             DataContext = dish;
+            dishInfo = dish;
         }
+
+        public Dish dishInfo { get; set; }
     }
 }

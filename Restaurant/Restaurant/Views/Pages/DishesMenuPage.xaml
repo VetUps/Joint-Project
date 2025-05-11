@@ -14,9 +14,19 @@
             <RowDefinition Height="229*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            
-        </StackPanel>
+        <Grid Grid.Row="0"
+              Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="305*"/>
+                <ColumnDefinition Width="305*"/>
+                <ColumnDefinition Width="305*"/>
+                <ColumnDefinition Width="305*"/>
+                <ColumnDefinition Width="550*"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="menuCategoryComboBox" 
+                      Grid.Column="0" SelectionChanged="menuCategoryComboBox_SelectionChanged"/>
+        </Grid>
 
         <ListBox ItemsSource="{Binding DishCardSource}"
                  Grid.Row="1"
