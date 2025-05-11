@@ -18,11 +18,11 @@
         <Grid Grid.Row="0"
               Margin="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="305*"/>
-                <ColumnDefinition Width="305*"/>
-                <ColumnDefinition Width="305*"/>
-                <ColumnDefinition Width="305*"/>
-                <ColumnDefinition Width="550*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="500*"/>
             </Grid.ColumnDefinitions>
 
             <xctk:CheckComboBox x:Name="menuCategoryComboBox" 
@@ -32,6 +32,11 @@
             <xctk:CheckComboBox x:Name="exceptionMenuCategoryCheckComboBox"
                                 Grid.Column="2"
                                 ItemSelectionChanged="exceptionMenuCategoryCheckComboBox_ItemSelectionChanged"/>
+
+            <xctk:WatermarkTextBox x:Name="searchWatermarkTextBox"
+                                   Watermark="Поиск..."
+                                   Grid.Column="3"
+                                   PreviewTextInput="searchWatermarkTextBox_PreviewTextInput"/>
         </Grid>
 
         <ListBox ItemsSource="{Binding DishCardSource}"

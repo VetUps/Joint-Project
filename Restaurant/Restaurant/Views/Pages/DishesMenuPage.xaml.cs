@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace Restaurant.Views.Pages
@@ -88,53 +89,14 @@ namespace Restaurant.Views.Pages
         {
             LoadDishes();
 
-            /*
-            string searchText = searchTextBox.Text.ToLower();
-
-            if (sortComboBox.SelectedIndex != -1)
-            {
-                string sortMethod = sortComboBox.SelectedItem.ToString();
-                SortPartners(sortMethod);
-            }
-            */
-
-
             List<string> filters = menuCategoryComboBox.SelectedItems.Cast<string>().ToList();
             MenuCategoryFilter(filters);
 
             List<string> exceptions = exceptionMenuCategoryCheckComboBox.SelectedItems.Cast<string>().ToList();
             ExceptionMenuCategoryFilter(exceptions);
-            //SearchPartners(searchText);
+
+            SearchPartners(searchWatermarkTextBox.Text);
         }
-
-        /*
-        private void SortPartners(string sortMethod)
-        {
-            ProductCardSource = ProductCardSource.OrderBy(o => o.Partner.CalculateDiscount).ToList();
-
-            if (sortMethod.Last() == '↓')
-            {
-                // Что-то может быть
-            }
-            else if (sortMethod.Last() == '↑')
-            {
-                ProductCardSource.Reverse();
-            }
-        }
-
-        private void SearchPartners(string serachField)
-        {
-            if (string.IsNullOrWhiteSpace(serachField) || string.IsNullOrEmpty(serachField))
-            {
-                // Может что-то быть
-            }
-
-            else
-            {
-                ProductCardSource = ProductCardSource.Where(o => o.Partner.PartnerImportName.ToLower().Contains(serachField)).ToList();
-            }
-        }
-        */
 
         // Функция фильтрации по категориям меню
         private void MenuCategoryFilter(List<string> filters)
@@ -182,6 +144,29 @@ namespace Restaurant.Views.Pages
         }
 
         private void exceptionMenuCategoryCheckComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
+        {
+            ApplyNavSettings();
+        }
+
+        private void SearchPartners(string searchField)
+        {
+            if (string.IsNullOrWhiteSpace(searchField) || string.IsNullOrEmpty(searchField))
+            {
+                // Может что-то быть
+            }
+
+            else
+            {
+                var filtered = _dishCards.Where(o => !o.dishInfo.DishName.ToLower().Contains(searchField.ToLower())).ToList();
+
+                foreach (var item in filtered)
+                {
+                    DishCardSource.Remove(item);
+                }
+            }
+        }
+
+        private void searchWatermarkTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             ApplyNavSettings();
         }
