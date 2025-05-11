@@ -23,14 +23,23 @@
                  Margin="30"
                  Background="Transparent"
                  HorizontalAlignment="Stretch"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden">
 
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <!-- Отступ между элементами -->
+                </Style>
+            </ListBox.ItemContainerStyle>
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="3"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"/>
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

@@ -20,4 +20,14 @@ public partial class Dish
     public virtual MenuCategory? MenuCategory { get; set; }
 
     public virtual ICollection<Allergen> Allergens { get; set; } = new List<Allergen>();
+    public string? GetImage
+    {
+        get
+        {
+            if (DishImage == null)
+                return "pack://application:,,,/Resources/Images/dishImage.png";
+            else
+                return $"pack://application:,,,/Resources/Images/{DishImage}";
+        }
+    }
 }

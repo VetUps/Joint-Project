@@ -7,28 +7,50 @@
              mc:Ignorable="d" 
              d:DesignHeight="565" d:DesignWidth="394" Foreground="White"
              FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
-             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Image x:Name="dishImage" 
-                   Source="{Binding DishImage}"
-                   Height="394"
-                   Width="394"
-                   VerticalAlignment="Top"/>
-            <TextBlock x:Name="dishNameTextBlock" 
-                       Text="{Binding DishName}"
-                       FontSize="50.93"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"/>
-            <TextBlock x:Name="dishDescriptionTextBlokc" 
-                       Text="{Binding DishDescription}"
-                       FontSize="20.49"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"/>
-            <TextBlock x:Name="dishPriceTextBlock"
-                       Text="{Binding DishPrice, StringFormat={}{0} ₽}"
-                       FontSize="33.28"
-                       TextAlignment="Center"/>
-        </StackPanel>
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch"
+             HorizontalAlignment="Stretch" 
+             VerticalAlignment="Stretch">
+
+    <Grid HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="dishImage" 
+               Source="{Binding GetImage}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Stretch="UniformToFill"
+               MaxHeight="394"
+               Grid.Row="0"/>
+
+        <TextBlock x:Name="dishNameTextBlock" 
+                   Text="{Binding DishName}"
+                   FontSize="50.93"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   TextWrapping="Wrap" 
+                   Grid.Row="1"/>
+
+        <TextBlock x:Name="dishDescriptionTextBlock" 
+                   Text="{Binding DishDescription}"
+                   FontSize="20.49"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   TextWrapping="Wrap" 
+                   Grid.Row="2"/>
+
+        <TextBlock x:Name="dishPriceTextBlock"
+                   Text="{Binding DishPrice, StringFormat={}{0} ₽}"
+                   FontSize="33.28"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   Grid.Row="3"/>
     </Grid>
 </UserControl>
