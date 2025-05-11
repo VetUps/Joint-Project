@@ -19,9 +19,11 @@ namespace Restaurant
         public MainWindow()
         {
             InitializeComponent();
+            // Ставим MainMenuPage как страницу по умолчанию по запуску
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/MainMenuPage.xaml"), UriKind.Relative);
         }
 
+        // Событие на переход в меню блюд
         private void menuNavigateButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/DishesMenuPage.xaml"), UriKind.Relative);

@@ -29,13 +29,19 @@ namespace Restaurant.Views.Pages
         public DishesMenuPage()
         {
             InitializeComponent();
+
+            // Ставим DataContext, чтобы все Binding-и работали исправно
             DataContext = this;
+            // Загружаем блюда
             LoadDishes();
+            // Загружаем фильтр по категории меню
             LoadMenuCategories();
         }
 
+        // Реализуем ивент для обновления списка блюд
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        // Функция для сообщения об изменениях
         protected void OnPropertyChanged([CallerMemberName] string name = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -53,6 +59,7 @@ namespace Restaurant.Views.Pages
             }
         }
 
+        // Функция загрузки блюд
         private void LoadDishes()
         {
             try
@@ -75,6 +82,7 @@ namespace Restaurant.Views.Pages
             }
         }
 
+        // Функция для применения всех выбранных фильтров
         private void ApplyNavSettings()
         {
             LoadDishes();
@@ -127,6 +135,7 @@ namespace Restaurant.Views.Pages
         }
         */
 
+        // Функция фильтрации по категориям меню
         private void MenuCategoryFilter(string filterMethod)
         {
             if (filterMethod == "Без фильтрации")
@@ -145,6 +154,8 @@ namespace Restaurant.Views.Pages
                 }
             }
         }
+
+        // Функция для заполнения фильтра меню категорий
         private void LoadMenuCategories()
         {
             using var db = new RestaurantDbContext();
@@ -157,6 +168,7 @@ namespace Restaurant.Views.Pages
             }
         }
 
+        // Событие на выбор фильтра категории меню
         private void menuCategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyNavSettings();
