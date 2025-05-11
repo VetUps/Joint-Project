@@ -29,6 +29,12 @@
                                 Grid.Column="0" 
                                 ItemSelectionChanged="menuCategoryComboBox_ItemSelectionChanged"/>
 
+            <xctk:MaskedTextBox x:Name="priceRangeMaskedTextBox"
+                                Mask="от 000 до 000"
+                                PromptChar="_"
+                                Grid.Column="1"
+                                PreviewKeyUp="priceRangeMaskedTextBox_PreviewKeyUp"/>
+
             <xctk:CheckComboBox x:Name="exceptionMenuCategoryCheckComboBox"
                                 Grid.Column="2"
                                 ItemSelectionChanged="exceptionMenuCategoryCheckComboBox_ItemSelectionChanged"/>

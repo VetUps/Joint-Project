@@ -96,6 +96,9 @@ namespace Restaurant.Views.Pages
             ExceptionMenuCategoryFilter(exceptions);
 
             SearchPartners(searchWatermarkTextBox.Text);
+
+            GetRangeValues(out int? from, out int? to);
+            PriceFilter(from, to);
         }
 
         // Функция фильтрации по категориям меню
@@ -167,6 +170,49 @@ namespace Restaurant.Views.Pages
         }
 
         private void searchWatermarkTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            ApplyNavSettings();
+        }
+
+
+        private void PriceFilter(int? from, int? to)
+        {
+            var filtered = _dishCards.Where(o => !(o.dishInfo.DishPrice >= from && o.dishInfo.DishPrice <= to)).ToList();
+
+            foreach (var item in filtered)
+            {
+                DishCardSource.Remove(item);
+            }
+        }
+
+        private void GetRangeValues(out int? from, out int? to)
+        {
+            from = 0;
+            to = 9999;
+
+            // Получаем текст без символов маски
+            string rawText = priceRangeMaskedTextBox.Text
+                .Replace("от", "")
+                .Replace("до", "")
+                .Trim();
+
+            string[] parts = rawText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length >= 2)
+            {
+                if (int.TryParse(parts[0].Replace("_", ""), out int fromValue))
+                {
+                    from = fromValue;
+                }
+
+                if (int.TryParse(parts[1].Replace("_", ""), out int toValue))
+                {
+                    to = toValue;
+                }
+            }
+        }
+
+        private void priceRangeMaskedTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             ApplyNavSettings();
         }
