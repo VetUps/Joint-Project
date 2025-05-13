@@ -24,9 +24,12 @@ namespace Restaurant.Views.UserControls
         {
             InitializeComponent();
             DataContext = table;
+            Table = table;
 
             StatusColor();
         }
+
+        public Table Table { get; private set; }
 
         private void StatusColor()
         {
