@@ -9,6 +9,14 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Меню" Background="#402715">
 
+    <Page.Resources>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+            <Setter Property="Background" Value="#DF8C22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Width" Value="20"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
@@ -26,22 +34,39 @@
             </Grid.ColumnDefinitions>
 
             <xctk:CheckComboBox x:Name="menuCategoryComboBox" 
-                                Grid.Column="0" 
+                                Grid.Column="0"
+                                Margin="5"
+                                Watermark="Только..."
+                                Style="{StaticResource CheckComboBoxStyle}"
                                 ItemSelectionChanged="menuCategoryComboBox_ItemSelectionChanged"/>
 
             <xctk:MaskedTextBox x:Name="priceRangeMaskedTextBox"
                                 Mask="от 000 до 000"
                                 PromptChar="_"
                                 Grid.Column="1"
-                                PreviewKeyUp="priceRangeMaskedTextBox_PreviewKeyUp"/>
+                                Margin="5"
+                                Background="Transparent"
+                                Foreground="#DF8C22"
+                                FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                                FontSize="35.07px"
+                                PreviewKeyUp="priceRangeMaskedTextBox_PreviewKeyUp">
+            </xctk:MaskedTextBox>
 
             <xctk:CheckComboBox x:Name="exceptionMenuCategoryCheckComboBox"
                                 Grid.Column="2"
+                                Margin="5"
+                                Watermark="Исключить..."
+                                Style="{StaticResource CheckComboBoxStyle}"
                                 ItemSelectionChanged="exceptionMenuCategoryCheckComboBox_ItemSelectionChanged"/>
 
             <xctk:WatermarkTextBox x:Name="searchWatermarkTextBox"
                                    Watermark="Поиск..."
                                    Grid.Column="3"
+                                   Margin="5"
+                                   Background="Transparent"
+                                   Foreground="#DF8C22"
+                                   FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                                   FontSize="35.07px"
                                    PreviewTextInput="searchWatermarkTextBox_PreviewTextInput"/>
         </Grid>
 
@@ -51,7 +76,8 @@
                  Background="Transparent"
                  HorizontalAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 BorderThickness="0">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
