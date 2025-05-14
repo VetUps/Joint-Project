@@ -28,10 +28,16 @@ namespace Restaurant.Views.Pages
             DataContext = this;
             LoadTables();
             UpdatePage();
+
+            dateChooseDateTimeUpDown.Minimum = DateTime.Now;
+            dateChooseDateTimeUpDown.Maximum = DateTime.Now.AddMonths(1).AddHours(1);
         }
 
         private List<TableControl> tablesSource_ = new List<TableControl>();
         public List<TableControl> TableSource {  get { return tablesSource_; } }
+
+        private List<Table> tablesSourceList_ = new List<Table>();
+        public List<Table> TableSourceList { get { return tablesSourceList_; } }
 
 
         private List<string> possiblePages = new List<string>();
@@ -50,6 +56,7 @@ namespace Restaurant.Views.Pages
                 foreach (var table in context.Tables)
                 {
                     tablesSource_.Add(new TableControl(table));
+                    TableSourceList.Add(table);
 
                     if (!possiblePages.Contains(table.TableLocation))
                     {

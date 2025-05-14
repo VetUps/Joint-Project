@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Restaurant.Views.Pages"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="TableResebationPage" FontSize="27.34">
@@ -70,19 +71,36 @@
         <!-- StackPanel с кнопками для управления бронью -->
         <StackPanel Grid.Column="1"
                     Margin="100 100 50 50">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" 
-                            Value="0,0,0,50"/>
-                    <!-- Нижний отступ 50px для каждой кнопки -->
-                </Style>
-            </StackPanel.Resources>
-            <Button x:Name="locationChooseButton"
-                    Content="Выбрать расположение"/>
-            <Button x:Name="dateChooseButton"
-                    Content="Выбрать дату"/>
+
+
+            <xctk:WatermarkComboBox x:Name="locationChooseComboBox"
+                                    Watermark="Выбрать расположение"
+                                    Margin="0 0 0 50"
+                                    ItemsSource="{Binding TableSourceList}">
+
+                <xctk:WatermarkComboBox.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding TableId}"/>
+                            <TextBlock Text="{Binding TableLocation}"
+                                       Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </xctk:WatermarkComboBox.ItemTemplate>
+            </xctk:WatermarkComboBox>
+
+            <xctk:DateTimeUpDown x:Name="dateChooseDateTimeUpDown"
+                                 Margin="0 0 0 50"
+                                 Format="LongDate">
+                <xctk:DateTimeUpDown.Watermark>
+                    <TextBlock Text="Выбор даты"
+                               Margin="0 0 210 0"/>
+                </xctk:DateTimeUpDown.Watermark>
+            </xctk:DateTimeUpDown>
+            
             <Button x:Name="timeChooseButton"
-                    Content="Выбрать время"/>
+                    Content="Выбрать время"
+                    Margin="0 0 0 50"/>
         </StackPanel>
     </Grid>
 </Page>
