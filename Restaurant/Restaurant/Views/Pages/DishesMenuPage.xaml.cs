@@ -168,12 +168,10 @@ namespace Restaurant.Views.Pages
                 }
             }
         }
-
-        private void searchWatermarkTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void searchWatermarkTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             ApplyNavSettings();
         }
-
 
         private void PriceFilter(int? from, int? to)
         {
