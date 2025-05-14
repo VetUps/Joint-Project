@@ -8,3 +8,4 @@ obj/
 *.suo
 *.cache
 *.log
+/Restaurant/Restaurant/Models/RestaurantDbContext.cs
