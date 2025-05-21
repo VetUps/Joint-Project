@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurant.Models;
 using Restaurant.Views.UserControls;
+using Restaurant.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -215,6 +216,12 @@ namespace Restaurant.Views.Pages
         private void priceRangeMaskedTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             ApplyNavSettings();
+        }
+
+        private void dishesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DishCard dishCard = (DishCard)dishesListBox.SelectedItem;
+            new DishMoreInfoWindow(dishCard.dishInfo).ShowDialog();
         }
     }
 }

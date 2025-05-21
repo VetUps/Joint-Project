@@ -70,13 +70,15 @@
                                    PreviewTextInput="searchWatermarkTextBox_PreviewTextInput"/>
         </Grid>
 
-        <ListBox ItemsSource="{Binding DishCardSource}"
+        <ListBox x:Name="dishesListBox"
+                 ItemsSource="{Binding DishCardSource}"
                  Grid.Row="1"
                  Margin="30"
                  Background="Transparent"
                  HorizontalAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 SelectionChanged="dishesListBox_SelectionChanged"
                  BorderThickness="0">
 
             <ListBox.ItemContainerStyle>
