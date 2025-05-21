@@ -28,5 +28,10 @@ namespace Restaurant
         {
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/DishesMenuPage.xaml"), UriKind.Relative);
         }
+
+        private void reviewsNavigationButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/FeedbackClientPage.xaml"), UriKind.Relative);
+        }
     }
 }

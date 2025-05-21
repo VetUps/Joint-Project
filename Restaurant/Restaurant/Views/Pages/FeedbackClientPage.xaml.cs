@@ -1,4 +1,5 @@
 ﻿using Restaurant.Models;
+using Restaurant.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,7 +64,9 @@ namespace Restaurant.Views.Pages
 
         private void LeaveFeedback_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Оставление отзыва
+            var leaveFeedbackForm = new LeaveFeedbackWindow();
+            leaveFeedbackForm.FeedbackSaved += () => LoadFeedbacks();
+            leaveFeedbackForm.ShowDialog();
         }
     }
 }

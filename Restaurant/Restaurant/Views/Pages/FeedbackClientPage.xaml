@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Restaurant.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="FeedbackCientPage">
+      Title="FeedbackCientPage"
+      Background="#402715">
 
     <Grid>
         <Grid.RowDefinitions>
