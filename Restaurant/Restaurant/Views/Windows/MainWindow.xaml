@@ -27,8 +27,10 @@
                             Style="{StaticResource NavButtonStyle}"
                             Margin="40,0"/>
 
-                    <Button Content="Отзывы"
-                            Style="{StaticResource NavButtonStyle}"/>
+                    <Button x:Name="reviewsNavigationButton"
+                            Content="Отзывы"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="reviewsNavigationButton_Click"/>
                 </StackPanel>
             </Border>
 
