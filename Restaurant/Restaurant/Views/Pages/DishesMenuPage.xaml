@@ -78,11 +78,14 @@
                  HorizontalAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                 SelectionChanged="dishesListBox_SelectionChanged"
+                 MouseLeftButtonDown="dishesListBox_MouseLeftButtonDown"
                  BorderThickness="0">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
+                    <EventSetter 
+                    Event="PreviewMouseLeftButtonDown" 
+                    Handler="ListBoxItem_PreviewMouseLeftButtonDown"/>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     <Setter Property="VerticalAlignment" Value="Stretch"/>
                     <Setter Property="Margin" Value="10"/>

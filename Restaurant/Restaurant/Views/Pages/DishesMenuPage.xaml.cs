@@ -216,10 +216,24 @@ namespace Restaurant.Views.Pages
             ApplyNavSettings();
         }
 
-        private void dishesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dishesListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DishCard dishCard = (DishCard)dishesListBox.SelectedItem;
             new DishMoreInfoWindow(dishCard.dishInfo).ShowDialog();
+        }
+
+        private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Получаем элемент ListBoxItem, на который кликнули
+            if (sender is ListBoxItem listBoxItem)
+            {
+                // Получаем DataContext элемента (ваш DishCard)
+                if (listBoxItem.DataContext is DishCard dishCard)
+                {
+                    // Выполняем действия с dishCard
+                    new DishMoreInfoWindow(dishCard.dishInfo).ShowDialog();
+                }
+            }
         }
     }
 }
