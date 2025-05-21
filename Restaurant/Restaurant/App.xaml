@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:Restaurant"
              StartupUri="/Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        
+        <local:RatingToColorConverter x:Key="RatingToColorConverter" 
+              xmlns:local="clr-namespace:Restaurant.Classes"/>
+        
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="#DF8C22"/>
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
@@ -37,50 +41,68 @@
         <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Foreground" Value="#DF8C22"/>
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+            <Setter Property="Background" Value="#402715"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderBrush" Value="#FFFF"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+        </Style>
+        <Style x:Key="ButtonClickStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#DF8C22"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="#FFFF"></Setter>
+            <Setter Property="FontSize" Value="35.07"></Setter>
         </Style>
 
         <Style TargetType="ListView" x:Key="TransparentListView">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#DF8C22"/>
-            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="10"/>
             <Setter Property="BorderThickness" Value="1"/>
-            
+
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="Foreground" Value="#DF8C22"/>
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
-                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#DF8C22"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="24,1,24,1"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+        </Style>
 
+        <Style x:Key="TextBlockTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#DF8C22"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+        </Style>
+
+       
     </Application.Resources>
 </Application>

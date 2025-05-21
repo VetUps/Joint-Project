@@ -5,8 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views.Windows"
         mc:Ignorable="d"
-        Title="LeaveFeedback" Height="450" Width="800">
-    <Grid>
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="White"
+        BorderThickness="3"
+        Title="LeaveFeedback" Height="614" Width="604">
+    <Grid Background="#402715" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="89*"></RowDefinition>
+            <RowDefinition Height="408"></RowDefinition>
+            <RowDefinition Height="89*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="550"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource TextBlockTitle}" Grid.Column="1" Height="60" Width="436">Оставить отзыв</TextBlock>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+
+            <!--выбор звезд-->
+            <StackPanel x:Name="Stars" Orientation="Horizontal">
+                <TextBlock x:Name="Star1" Text="★" FontSize="80" Foreground="LightGray" 
+                      MouseDown="Star_MouseDown" Tag="1" Cursor="Hand"/>
+                <TextBlock x:Name="Star2" Text="★" FontSize="80" Foreground="LightGray" 
+                      MouseDown="Star_MouseDown" Tag="2" Cursor="Hand"/>
+                <TextBlock x:Name="Star3" Text="★" FontSize="80" Foreground="LightGray" 
+                      MouseDown="Star_MouseDown" Tag="3" Cursor="Hand"/>
+                <TextBlock x:Name="Star4" Text="★" FontSize="80" Foreground="LightGray" 
+                      MouseDown="Star_MouseDown" Tag="4" Cursor="Hand"/>
+                <TextBlock x:Name="Star5" Text="★" FontSize="80" Foreground="LightGray" 
+                      MouseDown="Star_MouseDown" Tag="5" Cursor="Hand"/>
+            </StackPanel>
+
+            <!--текст-->
+            <TextBox x:Name="CommentText"
+                     Text="Напишите комментарий..."
+                     Foreground="Gray"
+                     Style="{StaticResource TextBoxStyle}"
+                     Width="543" Height="191"
+                     GotFocus="CommentText_GotFocus"
+                     LostFocus="CommentText_LostFocus"/>
+
+            <!--дата-->
+            <Button x:Name="ChooseDate" 
+                    Content="Дата посещения" 
+                    Click="ChooseDate_Click"
+                    Style="{StaticResource ButtonStyle}" 
+                    HorizontalAlignment="Left"
+                    Margin="0,30,0,0" 
+                    Width="234"/>
+            <DatePicker x:Name="VisitDatePicker" 
+                    Visibility="Collapsed"
+                    SelectedDateChanged="VisitDatePicker_SelectedDateChanged"
+                    Width="234"
+                    HorizontalAlignment="Left"/>
+        </StackPanel>
         
+        <StackPanel Grid.Row="2" Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+            <Button HorizontalAlignment="Left" x:Name="Exit" Style="{StaticResource ButtonStyle}" Width="112" Content="Назад" Margin="0,30,30,0" Click="Exit_Click"></Button>
+            <Button x:Name="Save" Style="{StaticResource ButtonStyle}" Width="171" Content="Сохранить" Margin="0,30,0,0" Click="Save_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

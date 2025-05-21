@@ -19,7 +19,6 @@ namespace Restaurant
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/BookingAdmin.xaml"), UriKind.Relative);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

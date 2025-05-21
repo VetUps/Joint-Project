@@ -30,8 +30,7 @@
                 </StackPanel>
             </Border>
 
-            <Frame x:Name="MainFrame"
-                    />
+            <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame"/>
         </DockPanel>
     </Grid>
 </Window>
