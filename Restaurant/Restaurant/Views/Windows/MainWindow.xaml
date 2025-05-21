@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+        Title="Ресторан" Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
         <!-- Вертикальное расположение элементов -->
         <DockPanel>
@@ -18,8 +18,10 @@
                             VerticalAlignment="Center"
                             Margin="40, 0">
 
-                    <Button Content="Меню"
-                            Style="{StaticResource NavButtonStyle}"/>
+                    <Button x:Name="menuNavigateButton"
+                            Content="Меню"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="menuNavigateButton_Click"/>
 
                     <Button Content="Забронировать столик"
                             Style="{StaticResource NavButtonStyle}"
@@ -31,7 +33,7 @@
             </Border>
 
             <Frame x:Name="MainFrame"
-                    />
+                   NavigationUIVisibility="Hidden"/>
         </DockPanel>
     </Grid>
 </Window>

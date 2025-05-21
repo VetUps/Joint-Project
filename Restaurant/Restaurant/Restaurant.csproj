@@ -10,11 +10,13 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\Leotaro-Regular.otf" />
+    <None Remove="Resources\Images\dishImage.png" />
     <None Remove="Resources\Images\main_menu_background.png" />
     <None Remove="Resources\Images\restaurant_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +31,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Fonts\Leotaro-Regular.otf" />
+    <Resource Include="Resources\Images\dishImage.png" />
     <Resource Include="Resources\Images\main_menu_background.png" />
     <Resource Include="Resources\Images\restaurant_logo.png" />
   </ItemGroup>
