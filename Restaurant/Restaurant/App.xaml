@@ -55,5 +55,24 @@
             <Setter Property="Height" Value="44"/>
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
         </Style>
+
+        <Style x:Key="TextBlockTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#DF8C22"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+        </Style>
     </Application.Resources>
 </Application>
