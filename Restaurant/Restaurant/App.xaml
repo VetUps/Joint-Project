@@ -5,6 +5,9 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              StartupUri="/Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        <local:RatingToColorConverter x:Key="RatingToColorConverter" 
+              xmlns:local="clr-namespace:Restaurant.Classes"/>
+        
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="#DF8C22"/>
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
@@ -40,6 +43,17 @@
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="FontSize" Value="35.07px"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#DF8C22"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="24,1,24,1"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
         </Style>
     </Application.Resources>
 </Application>
