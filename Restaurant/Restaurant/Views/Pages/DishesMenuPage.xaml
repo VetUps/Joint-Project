@@ -67,7 +67,7 @@
                                    Foreground="#DF8C22"
                                    FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
                                    FontSize="35.07px"
-                                   PreviewTextInput="searchWatermarkTextBox_PreviewTextInput"/>
+                                   PreviewKeyUp="searchWatermarkTextBox_PreviewKeyUp"/>
         </Grid>
 
         <ListBox x:Name="dishesListBox"
