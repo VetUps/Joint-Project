@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Restaurant.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,45 @@ namespace Restaurant.Views.Pages
         public FeedbackCientPage()
         {
             InitializeComponent();
+            DataContext = this;
+            LoadFeedbacks();
+        }
+
+        public ObservableCollection<FeedbackViewModel> Feedbacks { get; set; } = new ObservableCollection<FeedbackViewModel>();
+        public class FeedbackViewModel
+        {
+            public string Text { get; set; }
+            public int Rating { get; set; }
+            public string Date { get; set; }
+
+            public bool Star1 => Rating >= 1;
+            public bool Star2 => Rating >= 2;
+            public bool Star3 => Rating >= 3;
+            public bool Star4 => Rating >= 4;
+            public bool Star5 => Rating >= 5;
+        }
+
+        public void LoadFeedbacks()
+        {
+            using (var db = new RestaurantDbContext())
+            {
+                var feedbacks = db.Feedbacks
+                    .OrderByDescending(f => f.FeedbackDate)
+                    .Select(f => new FeedbackViewModel
+                    {
+                        Text = f.FeedbackText,
+                        Rating = (int)f.Rating,
+                        Date = string.Format("{0:dd.MM.yyyy}", f.FeedbackDate)
+                    })
+                    .ToList();
+
+                FeedbackContainer.ItemsSource = feedbacks;
+            }
+        }
+
+        private void LeaveFeedback_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Оставление отзыва
         }
     }
 }
