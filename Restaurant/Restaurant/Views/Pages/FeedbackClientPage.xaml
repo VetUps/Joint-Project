@@ -5,15 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Restaurant.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="FeedbackCientPage"
       Background="#402715">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="582"/>
-            <RowDefinition Height="99"/>
-            <RowDefinition Height="269"/>
+            <RowDefinition Height="780"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
 
@@ -88,7 +88,7 @@
         <!--Кнопка для написания комментария-->
         <StackPanel HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
-                    Grid.Row="1" >
+                    Grid.Row="1" Height="44" Width="270" >
             <Button x:Name="LeaveFeedback" 
                     Style="{StaticResource ButtonStyle}" 
                     Content="Оставить отзыв" 
