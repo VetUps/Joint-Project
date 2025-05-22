@@ -32,13 +32,22 @@ namespace Restaurant.Views.Windows
 
         private void GetAllergens()
         {
-            string allergens_list = "";
+            List<string> allergens_list = new List<string>();
+
             foreach(var allergen in dishInfo.Allergens)
             {
-                allergens_list = allergens_list + ", " + allergen.AllergenName;
+                allergens_list.Add(allergen.AllergenName);
             }
 
-            allergensTextBlock.Text = "Аллергены: " + allergens_list;
+            if (allergens_list.Count > 0)
+            {
+                allergensTextBlock.Text = "Аллергены: " + string.Join(", ", allergens_list);
+            }
+
+            else
+            {
+                allergensTextBlock.Text = "Для данного блюда пока не добавили аллергенов либо их нет";
+            }
         }
     }
 }
