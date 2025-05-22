@@ -97,14 +97,16 @@
                                Margin="0 0 210 0"/>
                 </xctk:DateTimeUpDown.Watermark>
             </xctk:DateTimeUpDown>
-            
+
             <Button x:Name="timeChooseButton"
                     Content="Выбрать время"
-                    Margin="0 0 0 50"/>
+                    Margin="0 0 0 50"
+                    Click="timeChooseButton_Click"/>
 
             <Button x:Name="makeReservationButton"
                     Content="Забронировать"
-                    Margin="0 0 0 50"/>
+                    Margin="0 0 0 50"
+                    Click="makeReservationButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

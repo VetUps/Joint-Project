@@ -24,5 +24,7 @@ namespace Restaurant.Views.UserControls
         {
             InitializeComponent();
         }
+
+        public int ControlIndex { get; set; }
     }
 }
