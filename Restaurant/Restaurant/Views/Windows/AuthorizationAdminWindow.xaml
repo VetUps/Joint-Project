@@ -68,7 +68,9 @@
                           Content="Показать пароль" 
                           Grid.Row="5"
                           Grid.Column="1"
-                          Foreground="White"/>
+                          Foreground="White"
+                          Checked="showPasswordCheckBox_Checked"
+                          Unchecked="showPasswordCheckBox_Unchecked"/>
 
                 <Button x:Name="enterButton"
                         Content="Войти"
@@ -76,7 +78,8 @@
                         Grid.Column="1"
                         Grid.Row="6"
                         Foreground="White"
-                        Style="{StaticResource NavButtonStyle}"/>
+                        Style="{StaticResource NavButtonStyle}"
+                        Click="enterButton_Click"/>
 
                 <Button x:Name="backButton"
                         Content="Назад"
@@ -84,7 +87,8 @@
                         Grid.Column="1"
                         Grid.Row="7"
                         Foreground="White"
-                        Style="{StaticResource NavButtonStyle}"/>
+                        Style="{StaticResource NavButtonStyle}"
+                        Click="backButton_Click"/>
             </Grid>
         </Border>
     </Grid>

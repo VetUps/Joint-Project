@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Restaurant.Views.Windows;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -36,7 +37,13 @@ namespace Restaurant
 
         private void adminEnterNavigationButton_Click(object sender, RoutedEventArgs e)
         {
+            AuthorizationAdminWindow authorization = new AuthorizationAdminWindow();
+            authorization.Owner = this;
+            if (authorization.ShowDialog() == true)
+                authorization.Close();
 
+            else
+                Close();
         }
     }
 }
