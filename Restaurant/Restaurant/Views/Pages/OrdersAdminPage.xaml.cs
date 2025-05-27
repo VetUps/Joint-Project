@@ -34,12 +34,13 @@ namespace Restaurant.Views.Pages
         {
             using (var context = new RestaurantDbContext())
             {
-                var orders = context.ClientTables
+                var orders = context.Orders
                 .Include(o => o.Client)
-                .ThenInclude(o => o.Orders)
+                .ThenInclude(o => o.ClientTables)
+                .ThenInclude(o => o.Table)
                 .Select(o => new Order
                 {
-                    OrderId = o.Client.Orders.or,
+                    OrderId = o.OrderId,
                     OrderDate = o.OrderDate.GetValueOrDefault(new DateOnly(1900, 1, 1)),
                     ClientName = o.Client.ClientName,
                     TableLocation = o.Client.ClientTables.FirstOrDefault().Table.TableLocation,
@@ -48,6 +49,8 @@ namespace Restaurant.Views.Pages
 
                 })
                 .ToList();
+
+                ordersListView.ItemsSource = orders;
             }
 
         }

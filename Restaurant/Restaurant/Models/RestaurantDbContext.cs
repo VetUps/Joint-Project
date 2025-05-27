@@ -103,12 +103,19 @@ public partial class RestaurantDbContext : DbContext
                 .HasMaxLength(13)
                 .IsFixedLength()
                 .HasColumnName("client_phone");
+
+            // Добавляем связь (если ещё не было)
+            entity.HasMany(c => c.ClientTables)
+                .WithOne(ct => ct.Client)
+                .HasForeignKey(ct => ct.ClientId);
         });
 
         modelBuilder.Entity<ClientTable>(entity =>
         {
+            entity.HasKey(e => new { e.ClientId, e.TableId })
+                .HasName("PRIMARY");
+
             entity
-                .HasNoKey()
                 .ToTable("client_table")
                 .UseCollation("utf8mb4_unicode_ci");
 
@@ -119,18 +126,20 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.ClientId)
                 .HasColumnType("int(11)")
                 .HasColumnName("client_id");
+
             entity.Property(e => e.TableId)
                 .HasColumnType("int(11)")
                 .HasColumnName("table_id");
 
-            entity.HasOne(d => d.Client).WithMany()
+            // Исправляем навигационные свойства
+            entity.HasOne(d => d.Client)
+                .WithMany(p => p.ClientTables) // Ссылка на коллекцию в Client
                 .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_fk");
 
-            entity.HasOne(d => d.Table).WithMany()
+            entity.HasOne(d => d.Table)
+                .WithMany(p => p.ClientTables) // Ссылка на коллекцию в Table
                 .HasForeignKey(d => d.TableId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("table_fk");
         });
 
@@ -314,6 +323,11 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.TableStatus)
                 .HasMaxLength(15)
                 .HasColumnName("table_status");
+
+            // Добавляем связь (если ещё не было)
+            entity.HasMany(t => t.ClientTables)
+                .WithOne(ct => ct.Table)
+                .HasForeignKey(ct => ct.TableId);
         });
 
         OnModelCreatingPartial(modelBuilder);
