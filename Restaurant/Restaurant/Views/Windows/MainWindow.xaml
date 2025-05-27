@@ -38,10 +38,11 @@
                             Grid.Column="2"
                             Click="reviewsNavigationButton_Click"/>
 
-                    <Button x:Name="admonEnterNavigationButton"
+                    <Button x:Name="adminEnterNavigationButton"
                             Content="Войти"
                             Grid.Column="3"
                             HorizontalAlignment="Right"
+                            Click="adminEnterNavigationButton_Click"
                             Style="{StaticResource NavButtonStyle}"/>
 
                 </Grid>

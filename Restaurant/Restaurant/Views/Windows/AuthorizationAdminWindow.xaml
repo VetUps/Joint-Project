@@ -1,0 +1,91 @@
+﻿<Window x:Class="Restaurant.Views.Windows.AuthorizationAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Views.Windows"
+        mc:Ignorable="d"
+        Title="Авторизация" ResizeMode="NoResize" Height="400" Width="500"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None">
+    <Grid>
+        <Border BorderBrush="#DF8C22" BorderThickness="2">
+            <Grid Background="#27150A">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Авторизация"
+                           Style="{StaticResource TextBlockWhiteStyle}"
+                           FontSize="25"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="Введите логин"
+                           Style="{StaticResource TextBlockWhiteStyle}"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           FontSize="18"/>
+
+                <TextBox x:Name="LoginTb" 
+                         Style="{StaticResource BoxMainStyle}"
+                         Grid.Row="2"
+                         Grid.Column="1"/>
+
+                <TextBlock Text="Введите пароль"
+                           Style="{StaticResource TextBlockWhiteStyle}"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           FontSize="18"/>
+
+                <Grid Grid.Row="4"  
+                      Grid.Column="1">
+                    <PasswordBox x:Name="adminPasswordPasswordBox"
+                                 PasswordChar="♥"
+                                 Style="{StaticResource PasswordBoxMainStyle}" />
+                    
+                    <TextBox x:Name="adminPasswordTextBox"
+                             Visibility="Hidden"
+                             Style="{StaticResource BoxMainStyle}"/>
+                </Grid>
+
+                <CheckBox x:Name="showPasswordCheckBox"
+                          Content="Показать пароль" 
+                          Grid.Row="5"
+                          Grid.Column="1"
+                          Foreground="White"/>
+
+                <Button x:Name="enterButton"
+                        Content="Войти"
+                        FontSize="18"
+                        Grid.Column="1"
+                        Grid.Row="6"
+                        Foreground="White"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button x:Name="backButton"
+                        Content="Назад"
+                        FontSize="18"
+                        Grid.Column="1"
+                        Grid.Row="7"
+                        Foreground="White"
+                        Style="{StaticResource NavButtonStyle}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -34,7 +34,7 @@ namespace Restaurant
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/FeedbackClientPage.xaml"), UriKind.Relative);
         }
 
-        private void admonEnterNavigationButton_Click(object sender, RoutedEventArgs e)
+        private void adminEnterNavigationButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
