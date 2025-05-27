@@ -13,10 +13,14 @@
             <Border DockPanel.Dock="Top" 
                     Background="#27150A" 
                     Height="100">
-                <StackPanel Orientation="Horizontal" 
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Margin="40, 0">
+                <Grid VerticalAlignment="Center"
+                      Margin="40, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
                     <Button x:Name="menuNavigateButton"
                             Content="Меню"
@@ -25,13 +29,22 @@
 
                     <Button Content="Забронировать столик"
                             Style="{StaticResource NavButtonStyle}"
+                            Grid.Column="1"
                             Margin="40,0"/>
 
                     <Button x:Name="reviewsNavigationButton"
                             Content="Отзывы"
                             Style="{StaticResource NavButtonStyle}"
+                            Grid.Column="2"
                             Click="reviewsNavigationButton_Click"/>
-                </StackPanel>
+
+                    <Button x:Name="admonEnterNavigationButton"
+                            Content="Войти"
+                            Grid.Column="3"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource NavButtonStyle}"/>
+
+                </Grid>
             </Border>
 
             <Frame x:Name="MainFrame"
