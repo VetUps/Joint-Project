@@ -22,35 +22,53 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Button x:Name="ordersNavigationButton"
                             Content="Заказы"
                             Grid.Column="0"
-                            Style="{StaticResource NavButtonStyle}"/>
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="ordersNavigationButton_Click"/>
+
+                    <Button x:Name="tablesNavigationButton"
+                            Content="Столики"
+                            Grid.Column="1"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="tablesNavigationButton_Click"/>
+
+                    <Button x:Name="reservationsNavigationButton"
+                            Content="Брони"
+                            Grid.Column="2"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="reservationsNavigationButton_Click"/>
 
                     <Button x:Name="dishMenuNavigationButton"
                             Content="Меню"
-                            Grid.Column="1"
+                            Grid.Column="3"
                             Style="{StaticResource NavButtonStyle}"
-                            Margin="40,0"/>
+                            Click="dishMenuNavigationButton_Click"/>
 
                     <Button x:Name="reviewsNavigationButton"
                             Content="Отзывы"
-                            Grid.Column="2"
-                            Style="{StaticResource NavButtonStyle}"/>
+                            Grid.Column="4"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="reviewsNavigationButton_Click"/>
 
                     <Button x:Name="reportForDishesNavigationButton"
                             Content="Отчетность"
-                            Grid.Column="3"
-                            Style="{StaticResource NavButtonStyle}"/>
+                            Grid.Column="5"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="reportForDishesNavigationButton_Click"/>
                     
-                    <Button x:Name="ExitAdmin"
+                    <Button x:Name="adminExitNavigationButton"
                             Content="Выйти"
-                            Grid.Column="4"
+                            Grid.Column="6"
                             HorizontalAlignment="Right"
-                            Style="{StaticResource NavButtonStyle}"/>
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="adminExitNavigationButton_Click"/>
                 </Grid>
             </Border>
 

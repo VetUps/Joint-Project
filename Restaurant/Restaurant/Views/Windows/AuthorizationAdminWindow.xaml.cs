@@ -74,7 +74,7 @@ namespace Restaurant.Views.Windows
                     if (context.Admins.FirstOrDefault(a => a.AdminPassword == CurPassword() && a.AdminLogin == LoginTb.Text) is Admin admin)
                     {
                         DialogResult = false;
-                        MessageBox.Show("Открытие окна админа");
+                        new AdminWindow(admin).Show();
                     }
                     else
                         MessageBox.Show("Ваша учётная запись не была найдена.", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Warning);
