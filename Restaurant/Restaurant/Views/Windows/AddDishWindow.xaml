@@ -1,0 +1,166 @@
+﻿<Window x:Class="Restaurant.Views.Windows.AddDishWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Views.Windows"
+        mc:Ignorable="d"
+        Title="Настройка блюда" Height="800" Width="700"
+        ResizeMode="CanMinimize"
+        >
+    <Grid>
+        <Border BorderBrush="#DF8C22" 
+                BorderThickness="3">
+            <Grid Background="#46230A" >
+                <Grid Margin="30,10,30,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock x:Name="titleTextBox" 
+                               Text="Добавить позицию" 
+                               Style="{StaticResource TextBlockMainStyle}" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               FontSize="32"/>
+                    
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image x:Name="dishImage" 
+                               Margin="0 0 0 10" 
+                               Source="{Binding DisplayedImage, UpdateSourceTrigger=PropertyChanged}" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"/>
+                        
+                        <Button x:Name="addImageButton" 
+                                Content="Изменить фотографию" 
+                                Grid.Column="1"  
+                                Style="{StaticResource NavButtonStyle}" 
+                                FontSize="19"
+                                Click="addImageButton_Click"/>
+                    </Grid>
+                    
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Style="{StaticResource TextBlockWhiteStyle}"
+                                   Grid.Column="0" 
+                                    Grid.Row="0"
+                                   Text="Название блюда" 
+                                   FontSize="15" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" 
+                                 Grid.Row="0" 
+                                 Margin="0,0,0,10" 
+                                 Text="{Binding DishName, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"  
+                                   Style="{StaticResource TextBlockWhiteStyle}" 
+                                   Grid.Column="0" 
+                                   Grid.Row="1" 
+                                   Text="Состав блюда"  
+                                   FontSize="15"/>
+                        <TextBox Grid.Column="1" 
+                                 Grid.Row="1" 
+                                 AcceptsReturn="True" 
+                                 Text="{Binding DishDescription, UpdateSourceTrigger=PropertyChanged}" 
+                                 TextWrapping="Wrap" 
+                                 Margin="0,0,0,10"/>
+
+                        <TextBlock Style="{StaticResource TextBlockWhiteStyle}" 
+                                   Grid.Column="0" Grid.Row="2" 
+                                   Text="Цена блюда" 
+                                   FontSize="15" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
+                        <TextBox x:Name="dishPriceTextBox"
+                                 Grid.Column="1" 
+                                 Grid.Row="2"  
+                                 PreviewTextInput="PriceDishesTb_PreviewTextInput" 
+                                 MaxLength="8" 
+                                 Text="{Binding DishPrice, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10"/>
+
+                        <TextBlock Style="{StaticResource TextBlockWhiteStyle}" 
+                                   Grid.Column="0" 
+                                   Grid.Row="3" 
+                                   Text="Категория блюда" 
+                                   FontSize="15" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
+
+                        <ComboBox x:Name="dishCategoryComboBox"
+                                  Grid.Column="1"
+                                  Grid.Row="3"
+                                  SelectedValue="{Binding MenuCategoryId}"
+                                  SelectedValuePath="MenuCategoryId"
+                                  DisplayMemberPath="MenuCategoryName"
+                                  Margin="0,0,0,10"/>
+
+                        <TextBlock Style="{StaticResource TextBlockWhiteStyle}" 
+                                   Grid.Column="0"
+                                   Grid.Row="4" 
+                                   Text="Аллергены блюда" 
+                                   FontSize="15" 
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <ListBox x:Name="allergenViewListBox"
+                                 Margin="0 0 0 10" 
+                                 SelectionMode="Multiple" 
+                                 Grid.Column="1" 
+                                 Grid.Row="4" >
+                            <ListBox.Resources>
+                                <Style TargetType="ListBoxItem">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="#DF8C22"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.Resources>
+                        </ListBox>
+
+                        <Button x:Name="saveDishButton" 
+                                Content="Сохранить" 
+                                Style="{StaticResource NavButtonStyle}" 
+                                Grid.Row="5" 
+                                Grid.ColumnSpan="2" 
+                                Grid.Column="0" 
+                                FontSize="25"
+                                Click="saveDishButton_Click"/>
+                        
+                        <Button x:Name="backButton" 
+                                Content="Назад" 
+                                Style="{StaticResource NavButtonStyle}"
+                                Grid.Row="6" 
+                                Grid.Column="0" 
+                                Grid.ColumnSpan="2" 
+                                FontSize="25"
+                                Click="backButton_Click"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
