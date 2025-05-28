@@ -160,7 +160,7 @@ public partial class RestaurantDbContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("dish_description");
             entity.Property(e => e.DishImage)
-                .HasColumnType("blob")
+                .HasColumnType("MEDIUMBLOB")
                 .HasColumnName("dish_image");
             entity.Property(e => e.DishName)
                 .HasMaxLength(50)

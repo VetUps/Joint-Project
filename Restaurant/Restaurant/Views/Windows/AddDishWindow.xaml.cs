@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
+using Restaurant.Classes;
 using Restaurant.Models;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace Restaurant.Views.Windows
                 string fileName = Path.GetFileName(filePath);
                 BitmapImage bitmapImage = new BitmapImage(new Uri(filePath));
                 dishImage.Source = bitmapImage;
-                _Dish.DishImage = fileName;
+                _Dish.DishImage = ImageConverter.ConvertImageToBytes(filePath);
             }
         }
 
