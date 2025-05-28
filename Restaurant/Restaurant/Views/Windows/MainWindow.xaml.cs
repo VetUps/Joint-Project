@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Restaurant.Views.Windows;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,22 +20,30 @@ namespace Restaurant
         public MainWindow()
         {
             InitializeComponent();
+            // Ставим MainMenuPage как страницу по умолчанию по запуску
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/MainMenuPage.xaml"), UriKind.Relative);
         }
 
+        // Событие на переход в меню блюд
         private void menuNavigateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/DishesMenuPage.xaml"), UriKind.Relative);
         }
 
-        private void tableReservationNavigateButton_Click(object sender, RoutedEventArgs e)
+        private void reviewsNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/TableReservationPage.xaml"), UriKind.Relative);
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/FeedbackClientPage.xaml"), UriKind.Relative);
         }
 
-        private void reviewsNavigateButton_Click(object sender, RoutedEventArgs e)
+        private void adminEnterNavigationButton_Click(object sender, RoutedEventArgs e)
         {
+            AuthorizationAdminWindow authorization = new AuthorizationAdminWindow();
+            authorization.Owner = this;
+            if (authorization.ShowDialog() == true)
+                authorization.Close();
 
+            else
+                Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+        Title="Ресторан" Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
         <!-- Вертикальное расположение элементов -->
         <DockPanel>
@@ -13,10 +13,14 @@
             <Border DockPanel.Dock="Top" 
                     Background="#27150A" 
                     Height="100">
-                <StackPanel Orientation="Horizontal" 
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Margin="40, 0">
+                <Grid VerticalAlignment="Center"
+                      Margin="40, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
                     <Button x:Name="menuNavigateButton"
                             Content="Меню"
@@ -26,14 +30,23 @@
                     <Button x:Name="tableReservationNavigateButton"
                             Content="Забронировать столик"
                             Style="{StaticResource NavButtonStyle}"
-                            Margin="40,0"
-                            Click="tableReservationNavigateButton_Click"/>
+                            Grid.Column="1"
+                            Margin="40,0"/>
 
-                    <Button x:Name="reviewsNavigateButton"
+                    <Button x:Name="reviewsNavigationButton"
                             Content="Отзывы"
                             Style="{StaticResource NavButtonStyle}"
-                            Click="reviewsNavigateButton_Click"/>
-                </StackPanel>
+                            Grid.Column="2"
+                            Click="reviewsNavigationButton_Click"/>
+
+                    <Button x:Name="adminEnterNavigationButton"
+                            Content="Войти"
+                            Grid.Column="3"
+                            HorizontalAlignment="Right"
+                            Click="adminEnterNavigationButton_Click"
+                            Style="{StaticResource NavButtonStyle}"/>
+
+                </Grid>
             </Border>
 
             <Frame x:Name="MainFrame"

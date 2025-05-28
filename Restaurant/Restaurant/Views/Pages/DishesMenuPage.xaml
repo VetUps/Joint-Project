@@ -1,0 +1,105 @@
+﻿<Page x:Class="Restaurant.Views.Pages.DishesMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Restaurant.Views.Pages" xmlns:local1="clr-namespace:Restaurant.Views.UserControls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Меню" Background="#402715">
+
+    <Page.Resources>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+            <Setter Property="Background" Value="#DF8C22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Width" Value="20"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="229*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="500*"/>
+            </Grid.ColumnDefinitions>
+
+            <xctk:CheckComboBox x:Name="menuCategoryComboBox" 
+                                Grid.Column="0"
+                                Margin="5"
+                                Watermark="Только..."
+                                Style="{StaticResource CheckComboBoxStyle}"
+                                ItemSelectionChanged="menuCategoryComboBox_ItemSelectionChanged"/>
+
+            <xctk:MaskedTextBox x:Name="priceRangeMaskedTextBox"
+                                Mask="от 000 до 000"
+                                PromptChar="_"
+                                Grid.Column="1"
+                                Margin="5"
+                                Background="Transparent"
+                                Foreground="#DF8C22"
+                                FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                                FontSize="35.07px"
+                                PreviewKeyUp="priceRangeMaskedTextBox_PreviewKeyUp">
+            </xctk:MaskedTextBox>
+
+            <xctk:CheckComboBox x:Name="exceptionMenuCategoryCheckComboBox"
+                                Grid.Column="2"
+                                Margin="5"
+                                Watermark="Исключить..."
+                                Style="{StaticResource CheckComboBoxStyle}"
+                                ItemSelectionChanged="exceptionMenuCategoryCheckComboBox_ItemSelectionChanged"/>
+
+            <xctk:WatermarkTextBox x:Name="searchWatermarkTextBox"
+                                   Watermark="Поиск..."
+                                   Grid.Column="3"
+                                   Margin="5"
+                                   Background="Transparent"
+                                   Foreground="#DF8C22"
+                                   FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                                   FontSize="35.07px"
+                                   PreviewKeyUp="searchWatermarkTextBox_PreviewKeyUp"/>
+        </Grid>
+
+        <ListBox x:Name="dishesListBox"
+                 ItemsSource="{Binding DishCardSource}"
+                 Grid.Row="1"
+                 Margin="30"
+                 Background="Transparent"
+                 HorizontalAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 MouseLeftButtonDown="dishesListBox_MouseLeftButtonDown"
+                 BorderThickness="0">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter 
+                    Event="PreviewMouseLeftButtonDown" 
+                    Handler="ListBoxItem_PreviewMouseLeftButtonDown"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <!-- Отступ между элементами -->
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Page>

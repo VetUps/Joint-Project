@@ -107,8 +107,11 @@ public partial class RestaurantDbContext : DbContext
 
         modelBuilder.Entity<ClientTable>(entity =>
         {
+            entity.HasKey(e => new { e.ClientId, e.TableId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
             entity
-                .HasNoKey()
                 .ToTable("client_table")
                 .UseCollation("utf8mb4_unicode_ci");
 
@@ -122,13 +125,19 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.TableId)
                 .HasColumnType("int(11)")
                 .HasColumnName("table_id");
+            entity.Property(e => e.DatetimeFrom)
+                .HasColumnType("datetime")
+                .HasColumnName("datetime_from");
+            entity.Property(e => e.DatetimeTo)
+                .HasColumnType("datetime")
+                .HasColumnName("datetime_to");
 
-            entity.HasOne(d => d.Client).WithMany()
+            entity.HasOne(d => d.Client).WithMany(p => p.ClientTables)
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_fk");
 
-            entity.HasOne(d => d.Table).WithMany()
+            entity.HasOne(d => d.Table).WithMany(p => p.ClientTables)
                 .HasForeignKey(d => d.TableId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("table_fk");
@@ -151,7 +160,7 @@ public partial class RestaurantDbContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("dish_description");
             entity.Property(e => e.DishImage)
-                .HasMaxLength(45)
+                .HasColumnType("MEDIUMBLOB")
                 .HasColumnName("dish_image");
             entity.Property(e => e.DishName)
                 .HasMaxLength(50)
@@ -196,8 +205,9 @@ public partial class RestaurantDbContext : DbContext
 
         modelBuilder.Entity<DishOrder>(entity =>
         {
+            entity.HasKey(e => e.DishQuantity).HasName("PRIMARY");
+
             entity
-                .HasNoKey()
                 .ToTable("dish_order")
                 .UseCollation("utf8mb4_unicode_ci");
 
@@ -205,19 +215,26 @@ public partial class RestaurantDbContext : DbContext
 
             entity.HasIndex(e => e.OrderId, "order_dish_fk_idx");
 
+            entity.Property(e => e.DishQuantity)
+                .HasColumnType("int(11)")
+                .HasColumnName("dish_quantity");
             entity.Property(e => e.DishId)
                 .HasColumnType("int(11)")
                 .HasColumnName("dish_id");
+            entity.Property(e => e.DishOrderId)
+                .HasDefaultValueSql("'1'")
+                .HasColumnType("int(11)")
+                .HasColumnName("dish_order_id");
             entity.Property(e => e.OrderId)
                 .HasColumnType("int(11)")
                 .HasColumnName("order_id");
 
-            entity.HasOne(d => d.Dish).WithMany()
+            entity.HasOne(d => d.Dish).WithMany(p => p.DishOrders)
                 .HasForeignKey(d => d.DishId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("dish_order_fk");
 
-            entity.HasOne(d => d.Order).WithMany()
+            entity.HasOne(d => d.Order).WithMany(p => p.DishOrders)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("order_dish_fk");
