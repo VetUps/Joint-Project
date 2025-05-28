@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurant.Models;
 using Restaurant.Views.UserControls;
+using Restaurant.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -85,7 +86,11 @@ namespace Restaurant.Views.Pages
 
         private void addDishButton_Click(object sender, RoutedEventArgs e)
         {
+            AddDishWindow productWindow = new AddDishWindow(null);
+            bool result = productWindow?.ShowDialog() ?? false;
 
+            if (result)
+                LoadDishes();
         }
     }
 }

@@ -42,7 +42,8 @@
                                 Content="Изменить фотографию" 
                                 Grid.Column="1"  
                                 Style="{StaticResource NavButtonStyle}" 
-                                FontSize="19"/>
+                                FontSize="19"
+                                Click="addImageButton_Click"/>
                     </Grid>
                     
                     <Grid Grid.Row="2">
@@ -146,14 +147,17 @@
                                 Grid.Row="5" 
                                 Grid.ColumnSpan="2" 
                                 Grid.Column="0" 
-                                FontSize="25"/>
+                                FontSize="25"
+                                Click="saveDishButton_Click"/>
+                        
                         <Button x:Name="backButton" 
                                 Content="Назад" 
                                 Style="{StaticResource NavButtonStyle}"
                                 Grid.Row="6" 
                                 Grid.Column="0" 
                                 Grid.ColumnSpan="2" 
-                                FontSize="25"/>
+                                FontSize="25"
+                                Click="backButton_Click"/>
                     </Grid>
                 </Grid>
             </Grid>
