@@ -57,16 +57,16 @@ namespace Restaurant.Views.Pages
 
         private void statusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox comboBox && comboBox.DataContext is Order selectedReservation)
+            if (sender is ComboBox comboBox && comboBox.DataContext is Order selectedOrder)
             {
                 try
                 {
                     using (var context = new RestaurantDbContext())
                     {
-                        var orderToUpdate = context.Orders.FirstOrDefault(o => o.OrderId == selectedReservation.OrderId);
+                        var orderToUpdate = context.Orders.FirstOrDefault(o => o.OrderId == selectedOrder.OrderId);
                         if (orderToUpdate != null)
                         {
-                            orderToUpdate.OrderStatus = selectedReservation.OrderStatus;
+                            orderToUpdate.OrderStatus = selectedOrder.OrderStatus;
                             context.SaveChanges();
                             MessageBox.Show("Статус заказа успешно обновлен!");
                         }
@@ -76,6 +76,35 @@ namespace Restaurant.Views.Pages
                 {
                     MessageBox.Show($"Ошибка: {ex.Message}");
                 }
+            }
+        }
+
+
+        private void deleteOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Order selectedOrder = (sender as Button).DataContext as Order;
+
+                using (var context = new RestaurantDbContext())
+                {
+                    var orderToDelete = context.Orders
+                        .Include(o => o.DishOrders) // Подгружаем связанные DishOrders
+                        .FirstOrDefault(o => o.OrderId == selectedOrder.OrderId);
+
+                    if (orderToDelete != null)
+                    {
+                        context.DishOrders.RemoveRange(orderToDelete.DishOrders); // Удаляем все DishOrders
+                        context.Orders.Remove(orderToDelete);
+                        context.SaveChanges();
+
+                        MessageBox.Show("Заказ успешно удалён!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
 
@@ -108,7 +137,7 @@ namespace Restaurant.Views.Pages
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
 
-            public string ReservationDetails => $"{OrderDate:yyyy-MM-dd} / Столик {TableID} / на имя: {ClientName} / местоположение: {TableLocation}";
+            public string OrderDetails => $"{OrderDate:yyyy-MM-dd} / Столик {TableID} / на имя: {ClientName} / местоположение: {TableLocation}";
 
             public ObservableCollection<string> StatusOptions { get; set; } = new ObservableCollection<string>
             {

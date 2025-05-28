@@ -13,16 +13,18 @@
                   Style="{StaticResource TransparentListView}" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center" 
-                  Height="693" Width="1488">
+                  Height="693" Width="1488"
+                  BorderBrush="#DF8C22">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding ReservationDetails}" 
+                        <TextBlock Text="{Binding OrderDetails}" 
                                    Grid.Column="0"
                                    VerticalAlignment="Center" 
                                    Foreground="White" 
@@ -36,8 +38,17 @@
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   Width="300"
-                                  Margin="10,0,0,0"
+                                  Margin="10, 0, 0, 0"
                                   SelectionChanged="statusComboBox_SelectionChanged"/>
+
+                        <Button x:Name="deleteOrderButton"
+                                Content="Удалить"
+                                Style="{StaticResource ButtonStyle}"
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Margin="10, 0, 0, 0"
+                                Click="deleteOrderButton_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
