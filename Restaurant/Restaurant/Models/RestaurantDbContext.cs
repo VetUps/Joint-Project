@@ -38,7 +38,7 @@ public partial class RestaurantDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=176.113.83.11;database=restaurant_db;user=mega_user;password=1234", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.28-mariadb"));
+        => optionsBuilder.UseMySql("server=localhost;database=restaurant_db;user=root;password=1234", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.28-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -107,11 +107,8 @@ public partial class RestaurantDbContext : DbContext
 
         modelBuilder.Entity<ClientTable>(entity =>
         {
-            entity.HasKey(e => new { e.ClientId, e.TableId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
             entity
+                .HasNoKey()
                 .ToTable("client_table")
                 .UseCollation("utf8mb4_unicode_ci");
 
@@ -125,19 +122,13 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.TableId)
                 .HasColumnType("int(11)")
                 .HasColumnName("table_id");
-            entity.Property(e => e.DatetimeFrom)
-                .HasColumnType("datetime")
-                .HasColumnName("datetime_from");
-            entity.Property(e => e.DatetimeTo)
-                .HasColumnType("datetime")
-                .HasColumnName("datetime_to");
 
-            entity.HasOne(d => d.Client).WithMany(p => p.ClientTables)
+            entity.HasOne(d => d.Client).WithMany()
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_fk");
 
-            entity.HasOne(d => d.Table).WithMany(p => p.ClientTables)
+            entity.HasOne(d => d.Table).WithMany()
                 .HasForeignKey(d => d.TableId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("table_fk");
@@ -160,7 +151,7 @@ public partial class RestaurantDbContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("dish_description");
             entity.Property(e => e.DishImage)
-                .HasColumnType("MEDIUMBLOB")
+                .HasMaxLength(45)
                 .HasColumnName("dish_image");
             entity.Property(e => e.DishName)
                 .HasMaxLength(50)
@@ -205,9 +196,8 @@ public partial class RestaurantDbContext : DbContext
 
         modelBuilder.Entity<DishOrder>(entity =>
         {
-            entity.HasKey(e => e.DishQuantity).HasName("PRIMARY");
-
             entity
+                .HasNoKey()
                 .ToTable("dish_order")
                 .UseCollation("utf8mb4_unicode_ci");
 
@@ -215,26 +205,19 @@ public partial class RestaurantDbContext : DbContext
 
             entity.HasIndex(e => e.OrderId, "order_dish_fk_idx");
 
-            entity.Property(e => e.DishQuantity)
-                .HasColumnType("int(11)")
-                .HasColumnName("dish_quantity");
             entity.Property(e => e.DishId)
                 .HasColumnType("int(11)")
                 .HasColumnName("dish_id");
-            entity.Property(e => e.DishOrderId)
-                .HasDefaultValueSql("'1'")
-                .HasColumnType("int(11)")
-                .HasColumnName("dish_order_id");
             entity.Property(e => e.OrderId)
                 .HasColumnType("int(11)")
                 .HasColumnName("order_id");
 
-            entity.HasOne(d => d.Dish).WithMany(p => p.DishOrders)
+            entity.HasOne(d => d.Dish).WithMany()
                 .HasForeignKey(d => d.DishId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("dish_order_fk");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.DishOrders)
+            entity.HasOne(d => d.Order).WithMany()
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("order_dish_fk");
