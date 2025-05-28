@@ -19,6 +19,7 @@ namespace Restaurant
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/OrderStatus.xaml"), UriKind.Relative);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
