@@ -34,7 +34,7 @@ namespace Restaurant.Views.Windows
 
         private void ordersNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для управления заказами
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/OrdersAdminPage.xaml"), UriKind.Relative);
         }
 
         private void tablesNavigationButton_Click(object sender, RoutedEventArgs e)
