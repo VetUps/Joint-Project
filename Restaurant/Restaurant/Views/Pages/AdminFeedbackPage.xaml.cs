@@ -1,5 +1,6 @@
 ﻿using Restaurant.Models;
 using Restaurant.Views.UserControls;
+using Restaurant.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,7 +68,17 @@ namespace Restaurant.Views.Pages
 
         private void feedbackListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // Открывается окно модерации
+            if (feedbackListBox.SelectedItem is FeedbackUserControl feedbackControl)
+            {
+                var feedback = feedbackControl.FullFeedbackInfo;
+                RedacOrDeleteFeedbackWindow redac = new RedacOrDeleteFeedbackWindow(feedback);
+
+                if (redac.ShowDialog() == true)
+                {
+                    FeedbackCardSource.Clear();
+                    LoadFeedBack();
+                }
+            }
         }
     }
 }

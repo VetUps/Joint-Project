@@ -25,6 +25,7 @@ namespace Restaurant.Views.UserControls
         {
             InitializeComponent();
 
+            FullFeedbackInfo = userFeedback;
             UserFeedback = new FeedbackViewModel
             {
                 Text = userFeedback.FeedbackText,
@@ -35,6 +36,7 @@ namespace Restaurant.Views.UserControls
             DataContext = UserFeedback;
         }
 
+        public Feedback FullFeedbackInfo { get; private set; }
         public FeedbackViewModel UserFeedback { get; set; }
 
         public class FeedbackViewModel

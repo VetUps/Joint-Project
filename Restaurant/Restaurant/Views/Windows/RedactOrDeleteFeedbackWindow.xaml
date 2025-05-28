@@ -46,7 +46,8 @@
                 Grid.Column="1"
                 Grid.Row="2"
                 Foreground="White"
-                Style="{StaticResource NavButtonStyle}"/>
+                Style="{StaticResource NavButtonStyle}"
+                Click="moderationButton_Click"/>
 
         <Button x:Name="backButton"
                 Content="Назад"
@@ -54,6 +55,7 @@
                 Grid.Column="1"
                 Grid.Row="3"
                 Foreground="White"
-                Style="{StaticResource NavButtonStyle}"/>
+                Style="{StaticResource NavButtonStyle}"
+                Click="backButton_Click"/>
     </Grid>
 </Window>
