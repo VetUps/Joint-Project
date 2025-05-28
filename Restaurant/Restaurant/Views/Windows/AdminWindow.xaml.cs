@@ -49,7 +49,7 @@ namespace Restaurant.Views.Windows
 
         private void dishMenuNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для редактирования меню
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/AdminDishesMenuPage.xaml"), UriKind.Relative);
         }
 
         private void reviewsNavigationButton_Click(object sender, RoutedEventArgs e)
