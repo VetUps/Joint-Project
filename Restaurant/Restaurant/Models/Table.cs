@@ -12,5 +12,6 @@ public partial class Table
     public string? TableLocation { get; set; }
 
     public string? TableStatus { get; set; }
-    public virtual ICollection<ClientTable> ClientTables { get; set; }
+
+    public virtual ICollection<ClientTable> ClientTables { get; set; } = new List<ClientTable>();
 }

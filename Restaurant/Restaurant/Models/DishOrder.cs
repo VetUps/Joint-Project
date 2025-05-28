@@ -5,9 +5,13 @@ namespace Restaurant.Models;
 
 public partial class DishOrder
 {
+    public int DishOrderId { get; set; }
+
     public int OrderId { get; set; }
 
     public int DishId { get; set; }
+
+    public int DishQuantity { get; set; }
 
     public virtual Dish Dish { get; set; } = null!;
 

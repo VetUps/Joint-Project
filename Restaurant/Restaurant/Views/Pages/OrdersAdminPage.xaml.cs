@@ -30,6 +30,46 @@ namespace Restaurant.Views.Pages
             Load();
         }
 
+        public class Order : INotifyPropertyChanged
+        {
+            public int OrderId { get; set; }
+            public DateOnly OrderDate { get; set; }
+            public string ClientName { get; set; }
+            public string TableLocation { get; set; }
+            public int TableID { get; set; }
+
+            private string _orderStatus;
+            public string OrderStatus
+            {
+                get { return _orderStatus; }
+                set
+                {
+                    if (_orderStatus != value)
+                    {
+                        _orderStatus = value;
+                        OnPropertyChanged(nameof(OrderStatus));
+                    }
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected virtual void OnPropertyChanged(string propertyName)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+            public string OrderDetails => $"{OrderDate:yyyy-MM-dd} / Столик {TableID} / на имя: {ClientName} / местоположение: {TableLocation}";
+
+            public ObservableCollection<string> StatusOptions { get; set; } = new ObservableCollection<string>
+            {
+                "Новый заказ",
+                "Обработка заказа",
+                "Готовится",
+                "Подан"
+            };
+        }
+        
         private void Load()
         {
             using (var context = new RestaurantDbContext())
@@ -98,6 +138,7 @@ namespace Restaurant.Views.Pages
                         context.Orders.Remove(orderToDelete);
                         context.SaveChanges();
 
+                        Load();
                         MessageBox.Show("Заказ успешно удалён!");
                     }
                 }
@@ -106,46 +147,6 @@ namespace Restaurant.Views.Pages
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
-        }
-
-        public class Order : INotifyPropertyChanged
-        {
-            public int OrderId { get; set; }
-            public DateOnly OrderDate { get; set; }
-            public string ClientName { get; set; }
-            public string TableLocation { get; set; }
-            public int TableID { get; set; }
-
-            private string _orderStatus;
-            public string OrderStatus
-            {
-                get { return _orderStatus; }
-                set
-                {
-                    if (_orderStatus != value)
-                    {
-                        _orderStatus = value;
-                        OnPropertyChanged(nameof(OrderStatus));
-                    }
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected virtual void OnPropertyChanged(string propertyName)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-
-            public string OrderDetails => $"{OrderDate:yyyy-MM-dd} / Столик {TableID} / на имя: {ClientName} / местоположение: {TableLocation}";
-
-            public ObservableCollection<string> StatusOptions { get; set; } = new ObservableCollection<string>
-            {
-                "Новый заказ",
-                "Обработка заказа",
-                "Готовится",
-                "Подан"
-            };
         }
     }
 }
