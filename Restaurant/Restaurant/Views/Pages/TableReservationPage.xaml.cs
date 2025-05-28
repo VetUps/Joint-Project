@@ -1,5 +1,6 @@
 ﻿using Restaurant.Models;
 using Restaurant.Views.UserControls;
+using Restaurant.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,6 +101,16 @@ namespace Restaurant.Views.Pages
             }
 
             UpdatePage();
+        }
+
+        private void makeReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void timeChooseButton_Click(object sender, RoutedEventArgs e)
+        {
+            new TimeReservationChooseWindow().ShowDialog();
         }
     }
 }
