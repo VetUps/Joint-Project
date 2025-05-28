@@ -25,9 +25,12 @@ namespace Restaurant.Views.UserControls
         {
             InitializeComponent();
 
-            UserFeedback.Text = userFeedback.FeedbackText;
-            UserFeedback.Rating = (int)userFeedback.Rating;
-            UserFeedback.Date = string.Format("{0:dd.MM.yyyy}", userFeedback.FeedbackDate);
+            UserFeedback = new FeedbackViewModel
+            {
+                Text = userFeedback.FeedbackText,
+                Rating = (int)userFeedback.Rating,
+                Date = string.Format("{0:dd.MM.yyyy}", userFeedback.FeedbackDate)
+            };
 
             DataContext = UserFeedback;
         }

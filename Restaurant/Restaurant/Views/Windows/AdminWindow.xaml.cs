@@ -54,7 +54,7 @@ namespace Restaurant.Views.Windows
 
         private void reviewsNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для модерации отзывов
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/AdminFeedbackPage.xaml"), UriKind.Relative);
         }
 
         private void reportForDishesNavigationButton_Click(object sender, RoutedEventArgs e)
