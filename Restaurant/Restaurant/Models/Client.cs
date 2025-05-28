@@ -15,8 +15,6 @@ public partial class Client
 
     public string ClientPhone { get; set; } = null!;
 
-    public virtual ICollection<ClientTable> ClientTables { get; set; } = new List<ClientTable>();
-
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
