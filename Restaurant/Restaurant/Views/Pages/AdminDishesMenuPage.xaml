@@ -34,11 +34,13 @@
 
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Name="EditBtn" 
-                              Header="Редактировать"/>
+                    <MenuItem Name="editDishButton" 
+                              Header="Редактировать"
+                              Click="editDishButton_Click"/>
                     
-                    <MenuItem Name="RemoveBtn" 
-                              Header="Удалить"/>
+                    <MenuItem Name="removeButton" 
+                              Header="Удалить"
+                              Click="removeButton_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
             

@@ -92,5 +92,62 @@ namespace Restaurant.Views.Pages
             if (result)
                 LoadDishes();
         }
+
+        private void editDishButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (dishesListBox.SelectedItem is DishCard card)
+            {
+                AddDishWindow productWindow = new AddDishWindow(card.dishInfo);
+                bool result = productWindow?.ShowDialog() ?? false;
+                if (result)
+                {
+                    //RestaurantDbContext.Instance.Entry(card._Dish).State = EntityState.Modified;
+                    LoadDishes();
+                }
+            }
+        }
+
+        private void removeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mesDelete = MessageBox.Show("Удаление необратимо.\nВы уверены?", 
+                                            "Внимание!", 
+                                            MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (mesDelete == MessageBoxResult.No)
+                return;
+
+            try
+            {
+                using (var context = new RestaurantDbContext())
+                {
+                    if (dishesListBox.SelectedItem is DishCard card)
+                    {
+                        var dishToRemove = context.Dishes.Find(card.dishInfo.DishId);
+                        if (dishToRemove == null)
+                            return;
+                        dishToRemove.Allergens.Clear();
+                        context.Dishes.Remove(dishToRemove);
+                        context.SaveChanges();
+
+                        LoadDishes();
+                        MessageBox.Show("Блюдо успешно удалено", 
+                                        "Успех", 
+                                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Для удаления выберите элемент из списка.", 
+                                        "Внимание", 
+                                        MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    context.SaveChanges();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка при удалении элемента", 
+                                "Ошибка!", 
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
