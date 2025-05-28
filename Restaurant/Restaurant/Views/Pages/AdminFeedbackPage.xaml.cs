@@ -64,5 +64,10 @@ namespace Restaurant.Views.Pages
                                  MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void feedbackListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Открывается окно модерации
+        }
     }
 }

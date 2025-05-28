@@ -9,13 +9,14 @@
       Title="AdminFeedbackPage">
 
     <Grid Background="#46230A">
-        <ListBox ItemsSource="{Binding FeedbackCardSource}"
+        <ListBox x:Name="feedbackListBox"
+                 ItemsSource="{Binding FeedbackCardSource}"
                  Grid.Row="1"
-                 Name="FeedbackItems"
                  Background="Transparent"
                  HorizontalAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 MouseLeftButtonUp="feedbackListBox_MouseLeftButtonUp">
             
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
