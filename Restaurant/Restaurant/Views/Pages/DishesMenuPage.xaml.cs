@@ -122,11 +122,16 @@ namespace Restaurant.Views.Pages
             using var db = new RestaurantDbContext();
 
             var menuCategories = db.MenuCategories.ToList();
+            var allergens = db.Allergens.ToList();
 
             foreach (var item in menuCategories)
             {
                 menuCategoryComboBox.Items.Add(item.MenuCategoryName);
-                exceptionMenuCategoryCheckComboBox.Items.Add(item.MenuCategoryName);
+            }
+
+            foreach (var item in allergens)
+            {
+                exceptionMenuCategoryCheckComboBox.Items.Add(item.AllergenName);
             }
         }
 
@@ -139,7 +144,8 @@ namespace Restaurant.Views.Pages
         // Функция фильтрации по категориям меню
         private void ExceptionMenuCategoryFilter(List<string> exceptions)
         {
-            var filtered = _dishCards.Where(o => exceptions.Contains(o.dishInfo.MenuCategory.MenuCategoryName)).ToList();
+
+            var filtered = _dishCards.Where(item => !item.dishInfo.Allergens.Any(allergen => exceptions.Contains(allergen.AllergenName))).ToList();
 
             foreach (var item in filtered)
             {
