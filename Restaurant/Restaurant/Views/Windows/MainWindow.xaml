@@ -25,13 +25,16 @@
                     <Button x:Name="menuNavigateButton"
                             Content="Меню"
                             Style="{StaticResource NavButtonStyle}"
+                            Grid.Column="0"
+                            Margin="40,0"
                             Click="menuNavigateButton_Click"/>
 
-                    <Button x:Name="tableReservationNavigateButton"
+                    <Button x:Name="tableReservationButton"
                             Content="Забронировать столик"
                             Style="{StaticResource NavButtonStyle}"
                             Grid.Column="1"
-                            Margin="40,0"/>
+                            Margin="40,0"
+                            Click="tableReservationButton_Click"/>
 
                     <Button x:Name="reviewsNavigationButton"
                             Content="Отзывы"

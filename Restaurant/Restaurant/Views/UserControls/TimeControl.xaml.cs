@@ -20,11 +20,15 @@ namespace Restaurant.Views.UserControls
     /// </summary>
     public partial class TimeControl : UserControl
     {
-        public TimeControl()
+        public TimeControl(TimeSpan timeFrom, TimeSpan timeTo)
         {
             InitializeComponent();
+            TimeFrom = timeFrom;
+            TimeTo = timeTo;
         }
 
         public int ControlIndex { get; set; }
+        public TimeSpan TimeFrom { get; set; }
+        public TimeSpan TimeTo { get; set; }
     }
 }

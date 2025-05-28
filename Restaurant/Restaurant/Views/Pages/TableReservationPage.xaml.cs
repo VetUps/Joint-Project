@@ -110,7 +110,9 @@ namespace Restaurant.Views.Pages
 
         private void timeChooseButton_Click(object sender, RoutedEventArgs e)
         {
-            new TimeReservationChooseWindow().ShowDialog();
+            DateTime choosenDateTime = (DateTime)dateChooseDateTimeUpDown.Value;
+            DateTime choosenDate = choosenDateTime.Date;
+            new TimeReservationChooseWindow(choosenDate).ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Restaurant.Models;
 using Restaurant.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,15 @@ namespace Restaurant.Views.Windows
     /// </summary>
     public partial class TimeReservationChooseWindow : Window, INotifyPropertyChanged
     {
-        public TimeReservationChooseWindow()
+        public TimeReservationChooseWindow(DateTime choosenDate)
         {
             InitializeComponent();
-            FillTimes();
 
             DataContext = this;
+            ChoosenDate = choosenDate;
+
+            FillTimes();
+            BlockTimes();
         }
 
         private List<TimeControl> _timeCards = new();
@@ -43,6 +47,8 @@ namespace Restaurant.Views.Windows
         int? firstSelectedTime = null;
         int? lastSelectedTime = null;
         int selectedItemsCount = 0;
+
+        DateTime ChoosenDate { get; set; }
         public List<TimeControl> CurrentItems { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -62,7 +68,7 @@ namespace Restaurant.Views.Windows
 
             for (int timeIndex = 0; timeIndex < times.Count - 1; timeIndex++)
             {
-                TimeControl timeControl = new TimeControl();
+                TimeControl timeControl = new TimeControl(times[timeIndex], times[timeIndex + 1]);
 
                 timeControl.timeFromTextBlock.Text = $"{times[timeIndex]}";
                 timeControl.timeToTextBlock.Text = $"{times[timeIndex + 1]}";
@@ -80,6 +86,48 @@ namespace Restaurant.Views.Windows
             CurrentItems = TimeCardsSource;
         }
 
+        private void BlockTimes()
+        {
+            using (var context = new RestaurantDbContext())
+            {
+                var reservations = context.ClientTables.Where(o => o.DatetimeFrom.Value.Date == ChoosenDate).ToList();
+
+                foreach (var timeCard in TimeCardsSource)
+                {
+                    foreach (var reservation in reservations)
+                    {
+                        if (timeCard.TimeFrom == reservation.DatetimeFrom.Value.TimeOfDay)
+                            DisableRange(timeCard.TimeFrom, timeCard.TimeTo);
+                    }
+                }
+            }
+        }
+
+        private List<TimeSpan> GenerateTimeSlots(TimeSpan timeFrom, TimeSpan timeTo)
+        {
+            var timeSlots = new List<TimeSpan>();
+            TimeSpan current = timeFrom;
+
+            while (current <= timeTo.Add(TimeSpan.FromMinutes(15)))
+            {
+                timeSlots.Add(current);
+                current = current.Add(TimeSpan.FromMinutes(15));
+            }
+
+            return timeSlots;
+        }
+
+        private void DisableRange(TimeSpan timeFrom, TimeSpan timeTo)
+        {
+            List <TimeSpan> blockedTime = GenerateTimeSlots(timeFrom, timeTo);
+
+            foreach (var timeCard in TimeCardsSource)
+            {
+                if (blockedTime.Contains(timeCard.TimeFrom))
+                    timeCard.chooseTimeCheckBox.IsEnabled = false;
+            }
+        }
+
         private void NotifyApp()
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentItems"));
@@ -95,12 +143,25 @@ namespace Restaurant.Views.Windows
             if (firstSelectedTime == null)
             {
                 firstSelectedTime = timeControl.ControlIndex;
-                CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, 2);
+
+                try
+                {
+                    CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, 2);
+                }
+                catch
+                {
+                    CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, 1);
+                }
             }
 
             else
             {
                 CurrentItems.Where(o => o.ControlIndex == timeControl.ControlIndex - 1).ToList()[0].chooseTimeCheckBox.IsEnabled = false;
+
+                if (selectedItemsCount == 8)
+                {
+                    return;
+                }
 
                 try
                 {
