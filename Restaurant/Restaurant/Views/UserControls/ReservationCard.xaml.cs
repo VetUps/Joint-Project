@@ -32,6 +32,7 @@ namespace Restaurant.Views.UserControls
             TableInfo = clientTable.Table;
         }
 
+        public List<string> StatusSource { get; set; } = ["Ожидание", "Действительна", "Прошла"];
         public ClientTable ClientTableInfo { get; set; }
         public Client ClientInfo {  get; set; }
         public Table TableInfo { get; set; }

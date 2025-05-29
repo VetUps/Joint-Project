@@ -46,7 +46,10 @@
                            FontSize="20"/>
             </StackPanel>
 
-            <ComboBox Grid.Column="1"
+            <ComboBox x:Name="reservationStatusComboBox"
+                      Grid.Column="1"
+                      SelectedItem="{Binding ClientTableInfo.ReservationStatus}"
+                      ItemsSource="{Binding StatusSource}"
                       Style="{StaticResource ComboBoxStyle}"
                       VerticalAlignment="Center"
                       HorizontalAlignment="Center"

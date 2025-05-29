@@ -12,6 +12,7 @@ public partial class ClientTable
     public DateTime? DatetimeFrom { get; set; }
 
     public DateTime? DatetimeTo { get; set; }
+    public string ReservationStatus { get; set; }
 
     public virtual Client Client { get; set; } = null!;
 

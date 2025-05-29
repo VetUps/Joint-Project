@@ -74,6 +74,7 @@ namespace Restaurant.Views.Pages
                         ReservationControl reservationControl = new ReservationControl(reservation);
                         reservationControl.deleteReservationButton.Click += deleteReservationButton_Click;
                         reservationControl.prolongReservationButton.Click += prolongReservationButton_Click;
+                        reservationControl.reservationStatusComboBox.SelectionChanged += reservationStatusComboBox_SelectionChanged;
 
                         ReservationCardSource.Add(reservationControl);
                     }
@@ -101,6 +102,9 @@ namespace Restaurant.Views.Pages
                 }
 
                 context.SaveChanges();
+                MessageBox.Show("Бронь успешно удалена",
+                                "Внимание!",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
 
                 LoadReservations();
             }
@@ -147,6 +151,30 @@ namespace Restaurant.Views.Pages
                 MessageBox.Show("Бронь успешно продлена",
                                 "Внимание!",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void reservationStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox && (comboBox.DataContext as ReservationControl).ClientTableInfo is ClientTable selectedReservation)
+            {
+                try
+                {
+                    using (var context = new RestaurantDbContext())
+                    {
+                        var reservationToUpdate = context.ClientTables.FirstOrDefault(o => o.ClientId == selectedReservation.ClientId && 
+                                                                                           o.TableId == selectedReservation.TableId);
+                        if (reservationToUpdate != null)
+                        {
+                            reservationToUpdate.ReservationStatus = selectedReservation.ReservationStatus;
+                            context.SaveChanges();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}");
+                }
             }
         }
     }

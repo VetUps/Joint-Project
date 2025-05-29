@@ -131,6 +131,9 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.DatetimeTo)
                 .HasColumnType("datetime")
                 .HasColumnName("datetime_to");
+            entity.Property(e => e.ReservationStatus)
+                .HasColumnType("varchar(20)")
+                .HasColumnName("reservation_status");
 
             entity.HasOne(d => d.Client).WithMany(p => p.ClientTables)
                 .HasForeignKey(d => d.ClientId)
