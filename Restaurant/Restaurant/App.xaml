@@ -6,8 +6,11 @@
              StartupUri="/Views/Windows/MainWindow.xaml">
     <Application.Resources>
         <local:RatingToColorConverter x:Key="RatingToColorConverter" 
-              xmlns:local="clr-namespace:Restaurant.Classes"/>
-        
+                                      xmlns:local="clr-namespace:Restaurant.Classes"/>
+
+        <local:TimeFormatConverter x:Key="TimeForamtConverter" 
+                                   xmlns:local="clr-namespace:Restaurant.Classes"/>
+
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="#DF8C22"/>
             <Setter Property="FontFamily" Value="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>

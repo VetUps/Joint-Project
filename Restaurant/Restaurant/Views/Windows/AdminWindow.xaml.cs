@@ -43,7 +43,7 @@ namespace Restaurant.Views.Windows
 
         private void reservationsNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для управления бронями
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/AdminReservationPage.xaml"), UriKind.Relative);
         }
 
         private void dishMenuNavigationButton_Click(object sender, RoutedEventArgs e)
