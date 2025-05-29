@@ -34,7 +34,7 @@
                         
                         <Image x:Name="dishImage" 
                                Margin="0 0 0 10" 
-                               Source="{Binding DisplayedImage, UpdateSourceTrigger=PropertyChanged}" 
+                               Source="{Binding GetImage, UpdateSourceTrigger=PropertyChanged}" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Center"/>
                         
