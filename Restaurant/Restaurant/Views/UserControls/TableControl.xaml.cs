@@ -20,10 +20,15 @@ namespace Restaurant.Views.UserControls
     /// </summary>
     public partial class TableControl : UserControl
     {
+        public TableControl()
+        {
+            InitializeComponent();
+        }
+
         public TableControl(Table table)
         {
             InitializeComponent();
-            DataContext = table;
+            DataContext = this;
             Table = table;
 
             StatusColor();

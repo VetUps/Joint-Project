@@ -5,35 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Restaurant.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="120" d:DesignWidth="400">
 
-    <Border BorderBrush="Black" 
-            BorderThickness="6" 
-            CornerRadius="20" 
-            Background="#402715">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+    <!-- Убраны внешние границы и фон, так как они будут управляться стилем ListViewItem -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0"
-                        Margin="20">
-                
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding TableId, StringFormat={}Столик {0} }"/>
-                    <TextBlock Text="{Binding TableLocation, StringFormat={} | {0}}"/>
-                </StackPanel>
-                <TextBlock Text="{Binding TableCapacity, StringFormat={}Вместимость: {0}}"/>
-                <TextBlock x:Name="tableStatusTextBlock" Text="{Binding TableStatus}"/>
+        <!-- Основной контент -->
+        <StackPanel Grid.Column="0"
+                    Margin="20"
+                    VerticalAlignment="Center">
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Table.TableId, StringFormat={}Столик {0} }" 
+                           Foreground="#DF8C22" 
+                           FontSize="20"
+                           FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+                <TextBlock Text="{Binding Table.TableLocation, StringFormat={} | {0}}"
+                           Foreground="#DF8C22" 
+                           FontSize="20"
+                           FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                           Margin="10,0,0,0"/>
             </StackPanel>
 
-            <Image Grid.Column="1" 
-                   VerticalAlignment="Center" 
-                   HorizontalAlignment="Center"
-                   Margin="10"
-                   Source="../../Resources/Images/restaurant_logo.png"/>
-        </Grid>
-    </Border>
+            <TextBlock Text="{Binding Table.TableCapacity, StringFormat={}Вместимость: {0}}"
+                       Foreground="#DF8C22" 
+                       FontSize="18"
+                       FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                       Margin="0,5,0,0"/>
+
+            <TextBlock x:Name="tableStatusTextBlock" 
+                       Text="{Binding Table.TableStatus}"
+                       Foreground="#DF8C22" 
+                       FontSize="18"
+                       FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Логотип -->
+        <Image Grid.Column="1" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"
+               Margin="10"
+               Source="../../Resources/Images/restaurant_logo.png"
+               Stretch="Uniform"
+               MaxHeight="80"/>
+    </Grid>
 </UserControl>
