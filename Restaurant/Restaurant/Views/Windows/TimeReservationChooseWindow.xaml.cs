@@ -50,6 +50,8 @@ namespace Restaurant.Views.Windows
 
         DateTime ChoosenDate { get; set; }
         public List<TimeControl> CurrentItems { get; private set; }
+        public TimeControl? FirstSelectedTimeControl {  get; set; }
+        public TimeControl? LastSelectedTimeControl { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,14 +94,10 @@ namespace Restaurant.Views.Windows
             {
                 var reservations = context.ClientTables.Where(o => o.DatetimeFrom.Value.Date == ChoosenDate).ToList();
 
-                foreach (var timeCard in TimeCardsSource)
-                {
-                    foreach (var reservation in reservations)
-                    {
-                        if (timeCard.TimeFrom == reservation.DatetimeFrom.Value.TimeOfDay)
-                            DisableRange(timeCard.TimeFrom, timeCard.TimeTo);
-                    }
-                }
+               foreach (var reservation in reservations)
+               {
+                    DisableRange(reservation.DatetimeFrom.Value.TimeOfDay, reservation.DatetimeTo.Value.TimeOfDay);
+               }
             }
         }
 
@@ -108,7 +106,7 @@ namespace Restaurant.Views.Windows
             var timeSlots = new List<TimeSpan>();
             TimeSpan current = timeFrom;
 
-            while (current <= timeTo.Add(TimeSpan.FromMinutes(15)))
+            while (current < timeTo)
             {
                 timeSlots.Add(current);
                 current = current.Add(TimeSpan.FromMinutes(15));
@@ -140,17 +138,18 @@ namespace Restaurant.Views.Windows
             CheckBox checkBox = sender as CheckBox;
             TimeControl timeControl = checkBox.DataContext as TimeControl;
 
-            if (firstSelectedTime == null)
+            if (FirstSelectedTimeControl == null)
             {
                 firstSelectedTime = timeControl.ControlIndex;
+                FirstSelectedTimeControl = timeControl;
 
                 try
                 {
-                    CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, 2);
+                    CurrentItems = TimeCardsSource.GetRange(FirstSelectedTimeControl.ControlIndex, 2);
                 }
                 catch
                 {
-                    CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, 1);
+                    CurrentItems = TimeCardsSource.GetRange(FirstSelectedTimeControl.ControlIndex, 1);
                 }
             }
 
@@ -160,17 +159,19 @@ namespace Restaurant.Views.Windows
 
                 if (selectedItemsCount == 8)
                 {
+                    LastSelectedTimeControl = timeControl;
                     return;
                 }
 
                 try
                 {
-                    CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, selectedItemsCount + 1);
+                    CurrentItems = TimeCardsSource.GetRange(FirstSelectedTimeControl.ControlIndex, selectedItemsCount + 1);
                 }
                 catch { }
             }
 
             lastSelectedTime = timeControl.ControlIndex;
+            LastSelectedTimeControl = timeControl;
             NotifyApp();
         }
 
@@ -184,22 +185,36 @@ namespace Restaurant.Views.Windows
             if (selectedItemsCount == 0)
             {
                 firstSelectedTime = null;
+                FirstSelectedTimeControl = null;
+
                 CurrentItems = TimeCardsSource;
             }
 
             else
             {
                 CurrentItems.Where(o => o.ControlIndex == timeControl.ControlIndex - 1).ToList()[0].chooseTimeCheckBox.IsEnabled = true;
-                CurrentItems = TimeCardsSource.GetRange((int)firstSelectedTime, selectedItemsCount + 1);
+                CurrentItems = TimeCardsSource.GetRange(FirstSelectedTimeControl.ControlIndex, selectedItemsCount + 1);
             }
 
             lastSelectedTime = timeControl.ControlIndex;
+            LastSelectedTimeControl = timeControl;
             NotifyApp();
         }
 
         private void timesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("fdsfsdf");
+            
+        }
+
+        private void selectTimeButton_Click(object sender, RoutedEventArgs e)
+        {
+            TimeSpan selectedTimeFrom = FirstSelectedTimeControl.TimeFrom;
+            TimeSpan selectedTimeTo = LastSelectedTimeControl.TimeTo;
+
+            DialogResult = true;
+            Close();
+
+            MessageBox.Show($"Ваше время: {selectedTimeFrom} - {selectedTimeTo}");
         }
     }
 }

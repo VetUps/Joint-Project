@@ -31,7 +31,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="6*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock x:Name="currentZoneTextBlock"
                                FontSize="50"
                                Text="{Binding CurrentLocation}"
@@ -69,14 +69,24 @@
         </Grid>
 
         <!-- StackPanel с кнопками для управления бронью -->
-        <StackPanel Grid.Column="1"
-                    Margin="100 100 50 50">
+        <Grid Grid.Column="1"
+              Margin="100 100 50 50">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
 
             <xctk:WatermarkComboBox x:Name="locationChooseComboBox"
                                     Watermark="Выбрать расположение"
                                     Margin="0 0 0 50"
-                                    ItemsSource="{Binding TableSourceList}">
+                                    ItemsSource="{Binding TableSourceList}"
+                                    Grid.Row="0"
+                                    SelectionChanged="locationChooseComboBox_SelectionChanged">
 
                 <xctk:WatermarkComboBox.ItemTemplate>
                     <ItemContainerTemplate>
@@ -91,7 +101,10 @@
 
             <xctk:DateTimeUpDown x:Name="dateChooseDateTimeUpDown"
                                  Margin="0 0 0 50"
-                                 Format="LongDate">
+                                 Format="LongDate"
+                                 Grid.Row="1"
+                                 IsEnabled="False"
+                                 ValueChanged="dateChooseDateTimeUpDown_ValueChanged">
                 <xctk:DateTimeUpDown.Watermark>
                     <TextBlock Text="Выбор даты"
                                Margin="0 0 210 0"/>
@@ -101,12 +114,47 @@
             <Button x:Name="timeChooseButton"
                     Content="Выбрать время"
                     Margin="0 0 0 50"
-                    Click="timeChooseButton_Click"/>
+                    Click="timeChooseButton_Click"
+                    Grid.Row="2"
+                    IsEnabled="False"/>
 
             <Button x:Name="makeReservationButton"
                     Content="Забронировать"
                     Margin="0 0 0 50"
-                    Click="makeReservationButton_Click"/>
-        </StackPanel>
+                    Click="makeReservationButton_Click"
+                     Grid.Row="3"
+                    IsEnabled="False"/>
+
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Информация о брони"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="{Binding SelectedLocation, StringFormat={}Расположение: {0}}"
+                           TextWrapping="Wrap"
+                           Grid.Row="1"/>
+
+                <TextBlock Text="{Binding SelectedDate, StringFormat={}Дата: {0}}"
+                           TextWrapping="Wrap"
+                           Grid.Row="2"/>
+
+                <TextBlock x:Name="timeFromTextBlock"
+                           Text="{Binding TimeFrom, StringFormat={}С {0}}"
+                           TextWrapping="Wrap"
+                           Grid.Row="3"/>
+                <TextBlock x:Name="timeToTextBlock"
+                           Text="{Binding TimeTo, StringFormat={}До {0}}"
+                           TextWrapping="Wrap"
+                           Grid.Row="4"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
