@@ -124,37 +124,6 @@
                     Click="makeReservationButton_Click"
                      Grid.Row="3"
                     IsEnabled="False"/>
-
-            <Grid Grid.Row="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Text="Информация о брони"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Text="{Binding SelectedLocation, StringFormat={}Расположение: {0}}"
-                           TextWrapping="Wrap"
-                           Grid.Row="1"/>
-
-                <TextBlock Text="{Binding SelectedDate, StringFormat={}Дата: {0}}"
-                           TextWrapping="Wrap"
-                           Grid.Row="2"/>
-
-                <TextBlock x:Name="timeFromTextBlock"
-                           Text="{Binding TimeFrom, StringFormat={}С {0}}"
-                           TextWrapping="Wrap"
-                           Grid.Row="3"/>
-                <TextBlock x:Name="timeToTextBlock"
-                           Text="{Binding TimeTo, StringFormat={}До {0}}"
-                           TextWrapping="Wrap"
-                           Grid.Row="4"/>
-            </Grid>
         </Grid>
     </Grid>
 </Page>

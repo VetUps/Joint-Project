@@ -33,10 +33,10 @@ namespace Restaurant.Views.Pages
             dateChooseDateTimeUpDown.Minimum = DateTime.Now;
             dateChooseDateTimeUpDown.Maximum = DateTime.Now.AddMonths(1).AddHours(1);
         }
-        public string SelectedLocation { get; set; } = "Не выбрано";
-        public string SelectedDate { get; set; } = "Не выбрано"; 
-        public TimeSpan TimeFrom {  get; set; } = TimeSpan.FromSeconds(1);
-        public TimeSpan TimeTo { get; set; } = TimeSpan.FromSeconds(1);
+        public Table SelectedTable { get; set; }
+        public DateTime SelectedDate { get; set; }
+        public TimeSpan TimeFrom {  get; set; }
+        public TimeSpan TimeTo { get; set; }
 
         private List<TableControl> tablesSource_ = new List<TableControl>();
         public List<TableControl> TableSource {  get { return tablesSource_; } }
@@ -81,11 +81,6 @@ namespace Restaurant.Views.Pages
             // Обновление привязок
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentPageItems)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentLocation)));
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedLocation)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDate)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeFrom)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeTo)));
         }
 
         private void previousFrameButton_Click(object sender, RoutedEventArgs e)
@@ -114,7 +109,7 @@ namespace Restaurant.Views.Pages
 
         private void makeReservationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            new TableReservationWindow(SelectedTable, SelectedDate, TimeFrom, TimeTo).ShowDialog();
         }
 
         private void timeChooseButton_Click(object sender, RoutedEventArgs e)
@@ -140,7 +135,6 @@ namespace Restaurant.Views.Pages
             {
                 TimeFrom = timeChooseWindow.FirstSelectedTimeControl.TimeFrom;
                 TimeTo = timeChooseWindow.LastSelectedTimeControl.TimeTo;
-                UpdateData();
 
                 makeReservationButton.IsEnabled = true;
             }
@@ -149,8 +143,7 @@ namespace Restaurant.Views.Pages
         private void locationChooseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Table selectedTable = (Table)locationChooseComboBox.SelectedItem;
-            SelectedLocation = $"{selectedTable.TableLocation}, {selectedTable.TableId} столик";
-            UpdateData();
+            SelectedTable = selectedTable;
 
             dateChooseDateTimeUpDown.IsEnabled = true;
             dateChooseDateTimeUpDown.Focus();
@@ -162,8 +155,7 @@ namespace Restaurant.Views.Pages
             {
                 DateTime selectedDate = (DateTime)dateChooseDateTimeUpDown.Value;
 
-                SelectedDate = selectedDate.ToShortDateString();
-                UpdateData();
+                SelectedDate = selectedDate;
 
                 timeChooseButton.IsEnabled = true;
                 timeChooseButton.Focus();

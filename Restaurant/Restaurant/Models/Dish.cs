@@ -37,4 +37,6 @@ public partial class Dish
                 return ImageConverter.LoadImageFromBytes(DishImage);
         }
     }
+
+    public override string ToString() => DishName;
 }

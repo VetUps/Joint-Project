@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Restaurant.Views.Windows"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Бронирование столика" ResizeMode="NoResize" Height="700" Width="684"
+        Title="Бронирование столика" ResizeMode="NoResize" Height="800" Width="684"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None">
     <Border BorderBrush="#DF8C22" 
@@ -67,12 +67,14 @@
                                     ItemsSource="{Binding DishesSourceList}"
                                     Margin="0 5 0 50"
                                     Watermark="Выбрать блюдо"
-                                    Style="{StaticResource CheckComboBoxStyle}">
+                                    FontSize="24.82px"
+                                    Style="{StaticResource CheckComboBoxStyle}"
+                                    ItemSelectionChanged="dishesPreOrderCheckComboBox_ItemSelectionChanged">
 
                     <xctk:CheckComboBox.ItemTemplate>
                         <ItemContainerTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding DsihName}"/>
+                                <TextBlock Text="{Binding DishName}"/>
                             </StackPanel>
                         </ItemContainerTemplate>
                     </xctk:CheckComboBox.ItemTemplate>
@@ -80,20 +82,38 @@
 
                 <Border BorderBrush="#DF8C22" 
                         BorderThickness="2"
-                        Padding="10">
-                    <TextBlock x:Name="userDataTextBlock"
-                               Text="{Binding UserData}"/>
+                        MaxHeight="110">
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  MaxHeight="110"
+                                  Margin="10">
+                        <TextBlock x:Name="userDataTextBlock"
+                                   Style="{StaticResource TextBlockMainStyle}"
+                                   Text="{Binding UserData}"
+                                   TextWrapping="Wrap"
+                                   FontSize="21.38px"/>
+                    </ScrollViewer>
                 </Border>
             </StackPanel>
-            
-            <!-- Кнопка отправки -->
-            <Button x:Name="submitButton" 
-                    Grid.Row="3"
-                    Style="{StaticResource ButtonStyle}"
-                    Content="Забронировать" 
-                    Height="60"
-                    FontSize="24.82px"
-                    Margin="10"/>
+
+            <StackPanel Grid.Row="3">
+                <Button x:Name="submitButton" 
+                        Style="{StaticResource ButtonStyle}"
+                        Content="Забронировать" 
+                        Height="60"
+                        FontSize="24.82px"
+                        Margin="10"
+                        Click="submitButton_Click"/>
+
+                <Button x:Name="backButton" 
+                        Style="{StaticResource ButtonStyle}"
+                        Content="Назад" 
+                        Height="60"
+                        FontSize="24.82px"
+                        Margin="10"
+                        Click="backButton_Click"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

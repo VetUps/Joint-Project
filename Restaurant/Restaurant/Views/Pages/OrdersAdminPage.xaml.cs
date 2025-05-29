@@ -77,7 +77,11 @@ namespace Restaurant.Views.Pages
                 var orders = context.Orders
                 .Include(o => o.Client)
                 .ThenInclude(o => o.ClientTables)
-                .ThenInclude(o => o.Table)
+                .ThenInclude(o => o.Table).ToList();
+
+                orders = orders.Where(o => o.Client.ClientTables != null).ToList();
+
+                ordersListView.ItemsSource = orders
                 .Select(o => new Order
                 {
                     OrderId = o.OrderId,
@@ -89,8 +93,6 @@ namespace Restaurant.Views.Pages
 
                 })
                 .ToList();
-
-                ordersListView.ItemsSource = orders;
             }
 
         }
