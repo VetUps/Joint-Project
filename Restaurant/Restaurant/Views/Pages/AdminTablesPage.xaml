@@ -37,7 +37,9 @@
                                   ItemsSource="{Binding StatusOptions}"
                                   SelectedItem="{Binding TableStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   VerticalAlignment="Center"
-                                  Margin="10,0,0,0"/>
+                                  Width="300"
+                                  Margin="10,0,0,0"
+                                  SelectionChanged="statusComboBox_SelectionChanged"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
