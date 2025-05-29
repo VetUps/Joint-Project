@@ -24,7 +24,6 @@ namespace Restaurant.Views.Windows
         public AdminWindow(Admin admin_)
         {
             InitializeComponent();
-            // Ставим MainMenuPage как страницу по умолчанию по запуску
             MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/MainMenuPage.xaml"), UriKind.Relative);
 
             Admin = admin_;
@@ -59,7 +58,7 @@ namespace Restaurant.Views.Windows
 
         private void reportForDishesNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для просмотра отчётности
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/AdminReportPage.xaml"), UriKind.Relative);
         }
 
         private void adminExitNavigationButton_Click(object sender, RoutedEventArgs e)

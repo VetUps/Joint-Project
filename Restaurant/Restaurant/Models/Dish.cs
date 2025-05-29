@@ -27,6 +27,7 @@ public partial class Dish
     public virtual MenuCategory? MenuCategory { get; set; }
 
     public virtual ICollection<Allergen> Allergens { get; set; } = new List<Allergen>();
+
     public BitmapImage GetImage
     {
         get
