@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Restaurant.Views.UserControls.TableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Restaurant.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="400">
+
+    <!-- Убраны внешние границы и фон, так как они будут управляться стилем ListViewItem -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Основной контент -->
+        <StackPanel Grid.Column="0"
+                    Margin="20"
+                    VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Table.TableId, StringFormat={}Столик {0} }" 
+                           Foreground="#DF8C22" 
+                           FontSize="20"
+                           FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"/>
+                <TextBlock Text="{Binding Table.TableLocation, StringFormat={} | {0}}"
+                           Foreground="#DF8C22" 
+                           FontSize="20"
+                           FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                           Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <TextBlock Text="{Binding Table.TableCapacity, StringFormat={}Вместимость: {0}}"
+                       Foreground="#DF8C22" 
+                       FontSize="18"
+                       FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                       Margin="0,5,0,0"/>
+
+            <TextBlock x:Name="tableStatusTextBlock" 
+                       Text="{Binding Table.TableStatus}"
+                       Foreground="#DF8C22" 
+                       FontSize="18"
+                       FontFamily="/Resources/Fonts/Leotaro-Regular.otf#Leotaro"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Логотип -->
+        <Image Grid.Column="1" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"
+               Margin="10"
+               Source="../../Resources/Images/restaurant_logo.png"
+               Stretch="Uniform"
+               MaxHeight="80"/>
+    </Grid>
+</UserControl>

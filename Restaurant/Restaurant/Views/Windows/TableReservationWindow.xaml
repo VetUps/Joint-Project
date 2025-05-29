@@ -1,0 +1,119 @@
+﻿<Window x:Class="Restaurant.Views.Windows.TableReservationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Views.Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Бронирование столика" ResizeMode="NoResize" Height="800" Width="684"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None">
+    <Border BorderBrush="#DF8C22" 
+            BorderThickness="2">
+
+        <Grid Background="#27150A">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Заполните данные"
+                       Grid.Row="0"
+                       Style="{StaticResource TextBlockTitle}"
+                       Margin="20"/>
+            
+            <StackPanel Margin="10"
+                        Grid.Row="1">
+                <!-- Фамилия (обязательное) -->
+                <xctk:WatermarkTextBox x:Name="surnameWatermarkTextBox" 
+                                       Style="{StaticResource TextBoxStyle}"
+                                       Watermark="Введите фамилию"
+                                       FontSize="24.82px"
+                                       Margin="0,0,0,20"/>
+
+                <!-- Имя (обязательное) -->
+                <xctk:WatermarkTextBox x:Name="nameWatermarkTextBox" 
+                                       Style="{StaticResource TextBoxStyle}"
+                                       Watermark="Введите имя"
+                                       FontSize="24.82px"
+                                       Margin="0,0,0,20"/>
+
+                <!-- Телефон (обязательное) -->
+                <xctk:WatermarkTextBox x:Name="phoneWatermarkTextBox" 
+                                       Style="{StaticResource TextBoxStyle}"
+                                       Watermark="Введите номер телефона"
+                                       FontSize="24.82px"
+                                       Margin="0,0,0,20"/>
+
+                <!-- Email (необязательное) -->
+                <xctk:WatermarkTextBox x:Name="emailWatermarkTextBox" 
+                                       Style="{StaticResource TextBoxStyle}"
+                                       Watermark="Введите почту (необязательно)"
+                                       FontSize="24.82px" 
+                                       Margin="0,0,0,30"/>
+            </StackPanel>
+
+            <StackPanel Margin="10"
+                        Grid.Row="2">
+                <TextBlock Text="Хотите сделать предзаказ?"
+                           Style="{StaticResource TextBlockMainStyle}"
+                           FontSize="21.38px"/>
+
+                <xctk:CheckComboBox x:Name="dishesPreOrderCheckComboBox"
+                                    ItemsSource="{Binding DishesSourceList}"
+                                    Margin="0 5 0 50"
+                                    Watermark="Выбрать блюдо"
+                                    FontSize="24.82px"
+                                    Style="{StaticResource CheckComboBoxStyle}"
+                                    ItemSelectionChanged="dishesPreOrderCheckComboBox_ItemSelectionChanged">
+
+                    <xctk:CheckComboBox.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding DishName}"/>
+                            </StackPanel>
+                        </ItemContainerTemplate>
+                    </xctk:CheckComboBox.ItemTemplate>
+                </xctk:CheckComboBox>
+
+                <Border BorderBrush="#DF8C22" 
+                        BorderThickness="2"
+                        MaxHeight="110">
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  MaxHeight="110"
+                                  Margin="10">
+                        <TextBlock x:Name="userDataTextBlock"
+                                   Style="{StaticResource TextBlockMainStyle}"
+                                   Text="{Binding UserData}"
+                                   TextWrapping="Wrap"
+                                   FontSize="21.38px"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <Button x:Name="submitButton" 
+                        Style="{StaticResource ButtonStyle}"
+                        Content="Забронировать" 
+                        Height="60"
+                        FontSize="24.82px"
+                        Margin="10"
+                        Click="submitButton_Click"/>
+
+                <Button x:Name="backButton" 
+                        Style="{StaticResource ButtonStyle}"
+                        Content="Назад" 
+                        Height="60"
+                        FontSize="24.82px"
+                        Margin="10"
+                        Click="backButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
