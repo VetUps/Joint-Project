@@ -93,6 +93,13 @@ namespace Restaurant.Views.Pages
             using (var context = new RestaurantDbContext())
             {
                 context.ClientTables.Remove(clientTable);
+
+                List<Models.Order> toDelete = context.Orders.Where(o => o.ClientId == clientTable.ClientId).ToList();
+                foreach (var order in toDelete)
+                {
+                    context.Orders.Remove(order);
+                }
+
                 context.SaveChanges();
 
                 LoadReservations();
