@@ -28,11 +28,15 @@ namespace Restaurant.Views.Pages
             InitializeComponent();
             DataContext = this;
             LoadTables();
-            UpdatePage();
+            UpdateData();
 
             dateChooseDateTimeUpDown.Minimum = DateTime.Now;
             dateChooseDateTimeUpDown.Maximum = DateTime.Now.AddMonths(1).AddHours(1);
         }
+        public string SelectedLocation { get; set; } = "Не выбрано";
+        public string SelectedDate { get; set; } = "Не выбрано"; 
+        public TimeSpan TimeFrom {  get; set; } = TimeSpan.FromSeconds(1);
+        public TimeSpan TimeTo { get; set; } = TimeSpan.FromSeconds(1);
 
         private List<TableControl> tablesSource_ = new List<TableControl>();
         public List<TableControl> TableSource {  get { return tablesSource_; } }
@@ -69,7 +73,7 @@ namespace Restaurant.Views.Pages
             maxPages_ = possiblePages.Count - 1;
         }
 
-        private void UpdatePage()
+        private void UpdateData()
         {
             CurrentLocation = possiblePages[currentPage_];
             CurrentPageItems = TableSource.Where(o => o.Table.TableLocation == CurrentLocation).ToList();
@@ -77,6 +81,11 @@ namespace Restaurant.Views.Pages
             // Обновление привязок
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentPageItems)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentLocation)));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedLocation)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDate)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeFrom)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeTo)));
         }
 
         private void previousFrameButton_Click(object sender, RoutedEventArgs e)
@@ -88,7 +97,7 @@ namespace Restaurant.Views.Pages
                 currentPage_ = maxPages_;
             }
 
-            UpdatePage();
+            UpdateData();
         }
 
         private void nextFrameButton_Click(object sender, RoutedEventArgs e)
@@ -100,7 +109,7 @@ namespace Restaurant.Views.Pages
                 currentPage_ = 0;
             }
 
-            UpdatePage();
+            UpdateData();
         }
 
         private void makeReservationButton_Click(object sender, RoutedEventArgs e)
@@ -110,9 +119,55 @@ namespace Restaurant.Views.Pages
 
         private void timeChooseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (dateChooseDateTimeUpDown.Value == null)
+            {
+                MessageBox.Show($"Вы не выбрали дату броинрования",
+                                 "Ошибка!",
+                                 MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return;
+            }
+
             DateTime choosenDateTime = (DateTime)dateChooseDateTimeUpDown.Value;
             DateTime choosenDate = choosenDateTime.Date;
-            new TimeReservationChooseWindow(choosenDate).ShowDialog();
+
+            Table choosenTable = (Table)locationChooseComboBox.SelectedItem;
+
+            TimeReservationChooseWindow timeChooseWindow = new TimeReservationChooseWindow(choosenDate, choosenTable);
+            timeChooseWindow.ShowDialog();
+
+            if (timeChooseWindow.DialogResult == true)
+            {
+                TimeFrom = timeChooseWindow.FirstSelectedTimeControl.TimeFrom;
+                TimeTo = timeChooseWindow.LastSelectedTimeControl.TimeTo;
+                UpdateData();
+
+                makeReservationButton.IsEnabled = true;
+            }
+        }
+
+        private void locationChooseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Table selectedTable = (Table)locationChooseComboBox.SelectedItem;
+            SelectedLocation = $"{selectedTable.TableLocation}, {selectedTable.TableId} столик";
+            UpdateData();
+
+            dateChooseDateTimeUpDown.IsEnabled = true;
+            dateChooseDateTimeUpDown.Focus();
+        }
+
+        private void dateChooseDateTimeUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (dateChooseDateTimeUpDown.Value != null)
+            {
+                DateTime selectedDate = (DateTime)dateChooseDateTimeUpDown.Value;
+
+                SelectedDate = selectedDate.ToShortDateString();
+                UpdateData();
+
+                timeChooseButton.IsEnabled = true;
+                timeChooseButton.Focus();
+            }
         }
     }
 }
