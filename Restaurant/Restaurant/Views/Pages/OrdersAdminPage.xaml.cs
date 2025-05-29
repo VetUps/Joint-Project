@@ -63,6 +63,7 @@ namespace Restaurant.Views.Pages
 
             public ObservableCollection<string> StatusOptions { get; set; } = new ObservableCollection<string>
             {
+                "Предзаказ",
                 "Новый заказ",
                 "Обработка заказа",
                 "Готовится",

@@ -1,0 +1,32 @@
+﻿<Window x:Class="Restaurant.Views.Windows.TimeReservationChooseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Views.Windows"
+        mc:Ignorable="d"
+        Title="Выбор времени" Height="550" Width="800"
+        Background="#27150A">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="timesListView"
+                  Grid.Row="0" 
+                  Margin="10"
+                  Background="Transparent"
+                  HorizontalContentAlignment="Stretch"
+                  ItemsSource="{Binding CurrentItems}"
+                  SelectionChanged="timesListView_SelectionChanged"/>
+
+        <Button x:Name="selectTimeButton"
+                Grid.Row="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Выбрать"
+                Click="selectTimeButton_Click"/>
+    </Grid>
+</Window>
