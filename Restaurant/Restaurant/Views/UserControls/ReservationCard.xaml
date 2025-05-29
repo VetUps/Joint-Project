@@ -29,16 +29,19 @@
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center">
 
-                    <TextBlock Text="{Binding ClientTableInfo.DatetimeFrom.Value, StringFormat={}{0:t} -}"
+                    <TextBlock Text="{Binding ClientTableInfo.DatetimeFrom, Converter={StaticResource TimeForamtConverter}, 
+                                              ConverterParameter=Time, StringFormat={}{0} -}"
                                Foreground="White" 
                                FontSize="20"/>
 
-                    <TextBlock Text="{Binding ClientTableInfo.DateTo.Value, StringFormat={} {0:t}}"
+                    <TextBlock Text="{Binding ClientTableInfo.DatetimeTo, Converter={StaticResource TimeForamtConverter}, 
+                                              ConverterParameter=Time, StringFormat={} {0}}"
                                Foreground="White" 
                                FontSize="20"/>
                 </StackPanel>
 
-                <TextBlock Text="21 января"
+                <TextBlock Text="{Binding ClientTableInfo.DatetimeTo, Converter={StaticResource TimeForamtConverter}, 
+                                              ConverterParameter=Date, StringFormat={} {0}}"
                            Foreground="White" 
                            FontSize="20"/>
             </StackPanel>
@@ -52,10 +55,10 @@
             <StackPanel Grid.Column="2"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <TextBlock Text="Дарья"
+                <TextBlock Text="{Binding ClientInfo.ClientFirstname}"
                            Foreground="White" 
                            FontSize="20"/>
-                <TextBlock Text="+79371523614"
+                <TextBlock Text="{Binding ClientInfo.ClientPhone, StringFormat={}+{0}}"
                            Foreground="White" 
                            FontSize="20"/>
             </StackPanel>
@@ -63,10 +66,10 @@
             <StackPanel Grid.Column="3"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <TextBlock Text="У окна"
+                <TextBlock Text="{Binding TableInfo.TableLocation}"
                            Foreground="White" 
                            FontSize="20"/>
-                <TextBlock Text="№ 17"
+                <TextBlock Text="{Binding TableInfo.TableId, StringFormat={}№{0}}"
                            Foreground="White" 
                            FontSize="20"/>
             </StackPanel>
@@ -74,11 +77,13 @@
             <StackPanel Grid.Column="4"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <Button Content="Удалить"
+                <Button x:Name="deleteReservationButton"
+                        Content="Удалить"
                         Margin="0 0 0 15"
                         Style="{StaticResource ButtonStyle}"/>
-                
-                <Button Content="+15 минут"
+
+                <Button x:Name="prolongReservationButton"
+                        Content="+15 минут"
                         Style="{StaticResource ButtonStyle}"/>
             </StackPanel>
         </Grid>

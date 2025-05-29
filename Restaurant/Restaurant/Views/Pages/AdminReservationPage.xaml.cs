@@ -71,13 +71,75 @@ namespace Restaurant.Views.Pages
 
                     foreach (var reservation in reservations)
                     {
-                        ReservationCardSource.Add(new ReservationControl(reservation));
+                        ReservationControl reservationControl = new ReservationControl(reservation);
+                        reservationControl.deleteReservationButton.Click += deleteReservationButton_Click;
+                        reservationControl.prolongReservationButton.Click += prolongReservationButton_Click;
+
+                        ReservationCardSource.Add(reservationControl);
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка загрузки: {ex.Message}");
+            }
+        }
+
+        private void deleteReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            ClientTable clientTable = (button.DataContext as ReservationControl).ClientTableInfo;
+
+            using (var context = new RestaurantDbContext())
+            {
+                context.ClientTables.Remove(clientTable);
+                context.SaveChanges();
+
+                LoadReservations();
+            }
+        }
+
+        private void prolongReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            ClientTable clientTable = (button.DataContext as ReservationControl).ClientTableInfo;
+
+            int selectedTableId = clientTable.TableId;
+            int selectedClientId = clientTable.ClientId;
+
+            DateTime selectedDate = clientTable.DatetimeFrom.Value.Date;
+            TimeSpan selectedDateTimeFrom = clientTable.DatetimeFrom.Value.TimeOfDay;
+            TimeSpan selectedDateTimeTo = clientTable.DatetimeTo.Value.TimeOfDay;
+
+            using (var context = new RestaurantDbContext())
+            {
+                var anotherReservations = context.ClientTables.Where(o => o.TableId == selectedTableId && 
+                                                                          o.DatetimeFrom.Value.Date == selectedDate
+                                                                          && o.ClientId != selectedClientId).ToList();
+
+                foreach (var otherReservations in anotherReservations)
+                {
+                    if (otherReservations.DatetimeFrom.Value.TimeOfDay == selectedDateTimeTo)
+                    {
+                        MessageBox.Show("Невозможно продлить бронь, так как на последующее время уже есть брони",
+                                        "Внимание!",
+                                        MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                        return;
+                    }
+                }
+
+                var reservationToUpdate = context.ClientTables.FirstOrDefault(o => o.TableId == selectedTableId && o.ClientId == selectedClientId);
+
+                var diff = reservationToUpdate.DatetimeTo.Value.AddMinutes(15) - reservationToUpdate.DatetimeFrom;
+                reservationToUpdate.DatetimeTo = reservationToUpdate.DatetimeTo.Value.AddMinutes(15);
+
+                context.SaveChanges();
+                LoadReservations();
+
+                MessageBox.Show("Бронь успешно продлена",
+                                "Внимание!",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
