@@ -135,22 +135,22 @@ namespace Restaurant.Views.Pages
             }
         }
 
-        // Событие на выбор фильтра категории меню
-        private void menuCategoryComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
-        {
-            ApplyNavSettings();
-        }
-
         // Функция фильтрации по категориям меню
         private void ExceptionMenuCategoryFilter(List<string> exceptions)
         {
 
-            var filtered = _dishCards.Where(item => !item.dishInfo.Allergens.Any(allergen => exceptions.Contains(allergen.AllergenName))).ToList();
+            var filtered = _dishCards.Where(item => item.dishInfo.Allergens.Any(allergen => exceptions.Contains(allergen.AllergenName))).ToList();
 
             foreach (var item in filtered)
             {
                 DishCardSource.Remove(item);
             }
+        }
+
+        // Событие на выбор фильтра категории меню
+        private void menuCategoryComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
+        {
+            ApplyNavSettings();
         }
 
         private void exceptionMenuCategoryCheckComboBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
@@ -225,7 +225,12 @@ namespace Restaurant.Views.Pages
         private void dishesListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DishCard dishCard = (DishCard)dishesListBox.SelectedItem;
-            new DishMoreInfoWindow(dishCard.dishInfo).ShowDialog();
+
+            try
+            {
+                new DishMoreInfoWindow(dishCard.dishInfo).ShowDialog();
+            }
+            catch { }
         }
 
         private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
