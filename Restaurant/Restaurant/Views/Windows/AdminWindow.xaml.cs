@@ -39,7 +39,7 @@ namespace Restaurant.Views.Windows
 
         private void tablesNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на фрейм для управления столиками
+            MainFrame.Navigate(new Uri("pack://application:,,,/Views/Pages/AdminTablesPage.xaml"), UriKind.Relative);
         }
 
         private void reservationsNavigationButton_Click(object sender, RoutedEventArgs e)
