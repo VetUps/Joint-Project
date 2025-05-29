@@ -25,11 +25,19 @@
             <StackPanel Grid.Column="0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <TextBlock Text="16:00:00-17:00:00"
-                           VerticalAlignment="Center" 
-                           Foreground="White" 
-                           FontSize="20"/>
-                
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+
+                    <TextBlock Text="{Binding ClientTableInfo.DatetimeFrom.Value, StringFormat={}{0:t} -}"
+                               Foreground="White" 
+                               FontSize="20"/>
+
+                    <TextBlock Text="{Binding ClientTableInfo.DateTo.Value, StringFormat={} {0:t}}"
+                               Foreground="White" 
+                               FontSize="20"/>
+                </StackPanel>
+
                 <TextBlock Text="21 января"
                            Foreground="White" 
                            FontSize="20"/>

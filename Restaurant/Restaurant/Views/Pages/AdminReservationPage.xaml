@@ -11,10 +11,13 @@
     <Grid Background="#402715">
         <ListView x:Name="reservationsListView" 
                   Style="{StaticResource TransparentListView}" 
+                  ItemsSource="{Binding ReservationCardSource}"
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center" 
-                  Height="700" Width="1500"
-                  BorderBrush="#DF8C22">
+                  Height="700" Width="1550"
+                  BorderBrush="#DF8C22"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
             
         </ListView>
     </Grid>
