@@ -131,7 +131,9 @@ namespace Restaurant.Views.Pages
             DateTime choosenDateTime = (DateTime)dateChooseDateTimeUpDown.Value;
             DateTime choosenDate = choosenDateTime.Date;
 
-            TimeReservationChooseWindow timeChooseWindow = new TimeReservationChooseWindow(choosenDate);
+            Table choosenTable = (Table)locationChooseComboBox.SelectedItem;
+
+            TimeReservationChooseWindow timeChooseWindow = new TimeReservationChooseWindow(choosenDate, choosenTable);
             timeChooseWindow.ShowDialog();
 
             if (timeChooseWindow.DialogResult == true)

@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Table = Restaurant.Models.Table;
 
 namespace Restaurant.Views.Windows
 {
@@ -23,12 +24,13 @@ namespace Restaurant.Views.Windows
     /// </summary>
     public partial class TimeReservationChooseWindow : Window, INotifyPropertyChanged
     {
-        public TimeReservationChooseWindow(DateTime choosenDate)
+        public TimeReservationChooseWindow(DateTime choosenDate, Table choosenTable)
         {
             InitializeComponent();
 
             DataContext = this;
             ChoosenDate = choosenDate;
+            ChoosenTable = choosenTable;
 
             FillTimes();
             BlockTimes();
@@ -48,7 +50,8 @@ namespace Restaurant.Views.Windows
         int? lastSelectedTime = null;
         int selectedItemsCount = 0;
 
-        DateTime ChoosenDate { get; set; }
+        public DateTime ChoosenDate { get; set; }
+        public Table ChoosenTable { get; set; }
         public List<TimeControl> CurrentItems { get; private set; }
         public TimeControl? FirstSelectedTimeControl {  get; set; }
         public TimeControl? LastSelectedTimeControl { get; set; }
@@ -92,7 +95,8 @@ namespace Restaurant.Views.Windows
         {
             using (var context = new RestaurantDbContext())
             {
-                var reservations = context.ClientTables.Where(o => o.DatetimeFrom.Value.Date == ChoosenDate).ToList();
+                var reservations = context.ClientTables.Where(o => o.DatetimeFrom.Value.Date == ChoosenDate && 
+                                                                   o.TableId == ChoosenTable.TableId).ToList();
 
                foreach (var reservation in reservations)
                {
